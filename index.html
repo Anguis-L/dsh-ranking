@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>DSH 插件真实下载榜</title>
+<style>
+:root{--bg:#0d1018;--card:#161b26;--fg:#eef2fa;--dim:#8290a8;--acc:#5ab4ff;--gold:#ffc44a}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);
+font:16px/1.6 -apple-system,"PingFang SC","Microsoft YaHei",sans-serif}
+.wrap{max-width:880px;margin:0 auto;padding:48px 20px 80px}
+h1{font-size:34px;margin:0 0 8px;letter-spacing:-.5px}
+h1 em{color:var(--acc);font-style:normal}
+.sub{color:var(--dim);margin:0 0 36px;font-size:15px}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px;margin-bottom:36px}
+.stat{background:var(--card);border-radius:12px;padding:18px 20px}
+.stat .v{font-size:26px;font-weight:700;color:var(--acc)}
+.stat .k{color:var(--dim);font-size:13px;margin-top:4px}
+table{width:100%;border-collapse:collapse;background:var(--card);border-radius:12px;overflow:hidden}
+th{text-align:left;padding:12px 14px;font-size:13px;color:var(--dim);font-weight:600;
+border-bottom:1px solid #232b3a}
+td{padding:11px 14px;border-bottom:1px solid #1b2230;font-size:14px}
+tr:last-child td{border-bottom:none}
+td.r{color:var(--dim);width:44px}
+tr:nth-child(-n+4) td.r{color:var(--gold);font-weight:700}
+td.n code{background:#1e2635;padding:2px 7px;border-radius:5px;font-size:13px;
+color:var(--fg);word-break:break-all}
+td.d{color:var(--acc);text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+td.c{color:var(--dim);font-size:12px}
+.note{background:#1a1520;border-left:3px solid #e0705a;border-radius:0 8px 8px 0;
+padding:14px 18px;margin:28px 0;font-size:14px;color:#d8c0bc}
+.tip{background:var(--card);border-radius:12px;padding:24px;margin-top:36px;text-align:center}
+.tip h2{font-size:17px;margin:0 0 10px}
+.tip p{color:var(--dim);font-size:14px;margin:0 0 16px}
+.qr{width:180px;height:180px;margin:0 auto;border:2px dashed #2c3648;border-radius:10px;
+display:flex;align-items:center;justify-content:center;color:#4a5568;font-size:13px}
+footer{margin-top:48px;padding-top:24px;border-top:1px solid #1b2230;
+color:var(--dim);font-size:13px}
+footer a{color:var(--acc)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>DSH 插件<em>真实下载榜</em></h1>
+  <p class="sub">星标会骗人，下载量不会。数据来自 npm registry 官方月下载量 API。</p>
+
+  <div class="stats">
+    <div class="stat"><div class="v">288</div><div class="k">采集样本（个 npm 包）</div></div>
+    <div class="stat"><div class="v">489,137</div><div class="k">样本月下载总量</div></div>
+    <div class="stat"><div class="v">492</div><div class="k">中位数 / 月</div></div>
+    <div class="stat"><div class="v">1,698</div><div class="k">平均 / 月（骗人）</div></div>
+  </div>
+
+  <div class="note">
+    <strong>三个反直觉的发现：</strong><br>
+    ① Top 10 个包吃掉 <strong>50.7%</strong> 的总下载量<br>
+    ② 中位数只有 492 次/月，平均却 1,698 —— <strong>差 3.5 倍，平均值骗人</strong><br>
+    ③ 榜单头部常年被「元数据 / 管理类」插件占据，真功能插件要往后翻
+  </div>
+
+  <table>
+    <thead><tr><th>#</th><th>插件</th><th style="text-align:right">月下载</th><th>类别</th></tr></thead>
+    <tbody>
+      <tr><td class="r">1</td><td class="n"><code>@deepseek-harness-tui/dsh-tui</code></td><td class="d">48,617</td><td class="c">ui</td></tr>
+      <tr><td class="r">2</td><td class="n"><code>dsh-univer-office</code></td><td class="d">48,113</td><td class="c">integration</td></tr>
+      <tr><td class="r">3</td><td class="n"><code>dsh-plugin-model-proxy</code></td><td class="d">42,888</td><td class="c"></td></tr>
+      <tr><td class="r">4</td><td class="n"><code>dsh-codex-subscription</code></td><td class="d">25,356</td><td class="c">provider</td></tr>
+      <tr><td class="r">5</td><td class="n"><code>dsh-plugin</code></td><td class="d">24,680</td><td class="c"></td></tr>
+      <tr><td class="r">6</td><td class="n"><code>dsh-bill-ilife</code></td><td class="d">9,758</td><td class="c">tool</td></tr>
+      <tr><td class="r">7</td><td class="n"><code>dsh-plugin-tool-management</code></td><td class="d">7,344</td><td class="c">tool</td></tr>
+      <tr><td class="r">8</td><td class="n"><code>dsh-taskboard</code></td><td class="d">6,710</td><td class="c">workflow</td></tr>
+      <tr><td class="r">9</td><td class="n"><code>dsh-hyperframes</code></td><td class="d">5,299</td><td class="c">tool</td></tr>
+      <tr><td class="r">10</td><td class="n"><code>dsh-deja</code></td><td class="d">5,151</td><td class="c">tool</td></tr>
+      <tr><td class="r">11</td><td class="n"><code>dsh-subusage</code></td><td class="d">4,937</td><td class="c">provider</td></tr>
+      <tr><td class="r">12</td><td class="n"><code>dsh-bill</code></td><td class="d">4,426</td><td class="c">tool</td></tr>
+      <tr><td class="r">13</td><td class="n"><code>dsh-ai4scholar</code></td><td class="d">4,310</td><td class="c">integration</td></tr>
+      <tr><td class="r">14</td><td class="n"><code>@dely0/dsh-personal-workbench</code></td><td class="d">3,992</td><td class="c">workflow</td></tr>
+      <tr><td class="r">15</td><td class="n"><code>dsh-todo-board</code></td><td class="d">3,914</td><td class="c">ui</td></tr>
+      <tr><td class="r">16</td><td class="n"><code>lume-dsh-plugin</code></td><td class="d">3,786</td><td class="c">tool</td></tr>
+      <tr><td class="r">17</td><td class="n"><code>dsh-claude-move</code></td><td class="d">3,734</td><td class="c">tool</td></tr>
+      <tr><td class="r">18</td><td class="n"><code>@anionex/dsh-computer-use</code></td><td class="d">3,705</td><td class="c">tool</td></tr>
+      <tr><td class="r">19</td><td class="n"><code>dsh-startup-animation</code></td><td class="d">3,524</td><td class="c">theme</td></tr>
+      <tr><td class="r">20</td><td class="n"><code>dsh-edit-turn</code></td><td class="d">3,523</td><td class="c">tool</td></tr>
+      <tr><td class="r">21</td><td class="n"><code>dsh-translate</code></td><td class="d">3,503</td><td class="c">tool</td></tr>
+      <tr><td class="r">22</td><td class="n"><code>dsh-astrbot-ingress</code></td><td class="d">3,311</td><td class="c">integration</td></tr>
+      <tr><td class="r">23</td><td class="n"><code>@dsh-enhanced/assistant-delivery</code></td><td class="d">3,250</td><td class="c">tool</td></tr>
+      <tr><td class="r">24</td><td class="n"><code>dsh-fs-encoding</code></td><td class="d">3,224</td><td class="c">tool</td></tr>
+      <tr><td class="r">25</td><td class="n"><code>@angelyeye/dsh-cost-tracker</code></td><td class="d">3,099</td><td class="c">tool</td></tr>
+      <tr><td class="r">26</td><td class="n"><code>@dsh-enhanced/assistant-evaluation</code></td><td class="d">3,080</td><td class="c">tool</td></tr>
+      <tr><td class="r">27</td><td class="n"><code>@dsh-enhanced/assistant-evolution</code></td><td class="d">3,018</td><td class="c">tool</td></tr>
+      <tr><td class="r">28</td><td class="n"><code>@riffkit/dsh-plugin</code></td><td class="d">2,951</td><td class="c">tool</td></tr>
+      <tr><td class="r">29</td><td class="n"><code>@roaming-ai/dsh-group-chat</code></td><td class="d">2,587</td><td class="c">ui</td></tr>
+      <tr><td class="r">30</td><td class="n"><code>deepseek-harness-wallet</code></td><td class="d">2,496</td><td class="c">tool</td></tr>
+    </tbody>
+  </table>
+
+  <div class="note">
+    ⚠ <strong>采样非全量</strong>：全量目录 18,276 个插件中 7,936 个在 npm 上，
+    受 API 速率限制采到 288 个。仅供趋势参照，不是权威榜单。
+  </div>
+
+  <div class="tip">
+    <h2>这份数据对你有用吗？</h2>
+    <p>如果它帮你省了挑插件的时间，可以请我喝杯咖啡。</p>
+    <div class="qr">赞赏码位（待填充）</div>
+  </div>
+
+  <footer>
+    数据可复现：<code>https://api.npmjs.org/downloads/point/last-month/&lt;包名&gt;</code><br>
+    相关项目：<a href="https://github.com/Anguis-L/dsh-plugin-trust-audit">dsh-plugin-trust-audit</a>
+    —— 审计插件 HTTP 路由是否真的做了鉴权栅栏
+  </footer>
+</div>
+</body>
+</html>
