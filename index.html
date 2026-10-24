@@ -33,8 +33,9 @@ padding:14px 18px;margin:28px 0;font-size:14px;color:#d8c0bc}
 .tip{background:var(--card);border-radius:12px;padding:24px;margin-top:36px;text-align:center}
 .tip h2{font-size:17px;margin:0 0 10px}
 .tip p{color:var(--dim);font-size:14px;margin:0 0 16px}
-.qr{width:180px;height:180px;margin:0 auto;border:2px dashed #2c3648;border-radius:10px;
-display:flex;align-items:center;justify-content:center;color:#4a5568;font-size:13px}
+.qrlink{display:inline-block;padding:8px;background:#fff;border-radius:10px;
+box-shadow:0 3px 14px rgba(0,0,0,.35)}
+.qrlink img{display:block;border-radius:4px}
 footer{margin-top:48px;padding-top:24px;border-top:1px solid #1b2230;
 color:var(--dim);font-size:13px}
 footer a{color:var(--acc)}
@@ -102,8 +103,10 @@ footer a{color:var(--acc)}
 
   <div class="tip">
     <h2>这份数据对你有用吗？</h2>
-    <p>如果它帮你省了挑插件的时间，可以请我喝杯咖啡。</p>
-    <div class="qr">赞赏码位（待填充）</div>
+    <p>如果它帮你省了挑插件的时间，可以请我喝杯咖啡。<br>（完全是自愿的，不给也照样能看）</p>
+    <a href="https://qr.alipay.com/tsx15971yi2xurkfrc1t300" target="_blank" rel="noopener" class="qrlink">
+      <img src="alipay-qr.png" alt="支付宝收款码" width="200" height="210">
+    </a>
   </div>
 
   <footer>
