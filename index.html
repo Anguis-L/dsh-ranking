@@ -47,6 +47,14 @@ border-radius:14px;padding:22px 24px;margin-bottom:26px}
 .lead p{margin:0 0 10px;font-size:16px} .lead p:last-child{margin:0}
 .lead b{color:var(--gold)}
 .lead .big{font-size:19px;color:var(--fg)}
+
+ul.dirs{list-style:none;padding:0;margin:0 0 8px}
+ul.dirs li{background:var(--card);border-radius:9px;padding:12px 16px;margin-bottom:8px;
+display:flex;flex-direction:column;gap:3px}
+ul.dirs a{color:var(--acc);text-decoration:none;font-weight:600;font-size:15px}
+ul.dirs a:hover{text-decoration:underline}
+ul.dirs span{color:#8f9cb2;font-size:13px}
+
 ul.shifts{list-style:none;padding:0;margin:0}
 ul.shifts li{background:var(--card);border-radius:9px;padding:10px 14px;margin-bottom:7px;
 font-size:14px;display:flex;flex-wrap:wrap;gap:8px;align-items:baseline}
@@ -92,6 +100,22 @@ footer a{color:var(--acc)}
     <div class="stat"><div class="v">2,519,533</div><div class="k">样本周下载合计</div></div>
   </div>
 
+
+  <h2>生态目录</h2>
+  <p class="sub">这些是 DSH 生态里做得比较完整的目录和榜单，各有侧重，交叉看更准。</p>
+  <ul class="dirs">
+    <li><a href="https://dpharness.com/top">DeepSeek Harness Hub</a>
+        <span>21,745 个插件 · 汉化 + 安装命令 + 实装验证 + 综合分。收录标准是「真有人在用、装上就能跑」</span></li>
+    <li><a href="https://dshmarket.com">DSH Marketplace</a>
+        <span>插件市场 · 每个插件都有真实安装验证与中文详情页 · 免注册</span></li>
+    <li><a href="https://dsh-plugin-store.pages.dev">DSH Plugin Store</a>
+        <span>收录 800+ 开源插件 · 实时同步与一键安装</span></li>
+    <li><a href="https://github.com/awesome-dsh-plugin/awesome-dsh-plugin">awesome-dsh-plugin</a>
+        <span>社区维护的插件清单 · 6,000+ 条目 · 收录标准是仓库必须声明 dsh.bundle</span></li>
+    <li><a href="https://github.com/imsai-sh/awesome-deepseek-harness-plugins">1024Store catalog</a>
+        <span>官方目录 · 会统计安装量，插件发布到 npm 后自动变成可安装</span></li>
+  </ul>
+
   <h2>被星数严重低估的插件</h2>
   <ul class="shifts">
 <li><span class="sh">星排 95 → 下载排 4 （差 91 位）</span><a href="https://github.com/MichengAI/dsh-codex-ui" target="_blank" rel="noopener">MichengAI/dsh-codex-ui</a><span class="num">★207 · 125,903/周</span></li>
@@ -110,18 +134,18 @@ footer a{color:var(--acc)}
 
   <h2>被星数严重高估的插件</h2>
   <ul class="shifts">
-<li><span class="sh">星排 5 ← 下载排 92 （差 87 位）</span><a href="https://github.com/MemTensor/MemOS" target="_blank" rel="noopener">MemTensor/MemOS</a><span class="num">★12,073 · 1,585/周</span></li>
-<li><span class="sh">星排 31 ← 下载排 97 （差 66 位）</span><a href="https://github.com/LiPu-jpg/Openwrite" target="_blank" rel="noopener">LiPu-jpg/Openwrite</a><span class="num">★872 · 1,444/周</span></li>
-<li><span class="sh">星排 36 ← 下载排 103 （差 67 位）</span><a href="https://github.com/omdsh-dev/dsh-browser" target="_blank" rel="noopener">omdsh-dev/dsh-browser</a><span class="num">★756 · 1,378/周</span></li>
-<li><span class="sh">星排 27 ← 下载排 108 （差 81 位）</span><a href="https://github.com/Miaotofu01/Study-Mate" target="_blank" rel="noopener">Miaotofu01/Study-Mate</a><span class="num">★1,138 · 1,337/周</span></li>
-<li><span class="sh">星排 41 ← 下载排 128 （差 87 位）</span><a href="https://github.com/Clearailhc/clearai-dsh" target="_blank" rel="noopener">Clearailhc/clearai-dsh</a><span class="num">★666 · 1,053/周</span></li>
 <li><span class="sh">星排 3 ← 下载排 137 （差 134 位）</span><a href="https://github.com/Tencent/WeKnora" target="_blank" rel="noopener">Tencent/WeKnora</a><span class="num">★35,302 · 871/周</span></li>
-<li><span class="sh">星排 88 ← 下载排 148 （差 60 位）</span><a href="https://github.com/weijiafu14/pi2dsh" target="_blank" rel="noopener">weijiafu14/pi2dsh</a><span class="num">★218 · 691/周</span></li>
-<li><span class="sh">星排 60 ← 下载排 150 （差 90 位）</span><a href="https://github.com/Alice-Marx/dsh-model-router" target="_blank" rel="noopener">Alice-Marx/dsh-model-router</a><span class="num">★372 · 687/周</span></li>
-<li><span class="sh">星排 18 ← 下载排 161 （差 143 位）</span><a href="https://github.com/zilliztech/memsearch" target="_blank" rel="noopener">zilliztech/memsearch</a><span class="num">★2,782 · 649/周</span></li>
+<li><span class="sh">星排 4 ← 下载排 282 （差 278 位）</span><a href="https://github.com/anywhere-labs/dsh-desktop" target="_blank" rel="noopener">anywhere-labs/dsh-desktop</a><span class="num">★33,019 · 192/周</span></li>
+<li><span class="sh">星排 5 ← 下载排 92 （差 87 位）</span><a href="https://github.com/MemTensor/MemOS" target="_blank" rel="noopener">MemTensor/MemOS</a><span class="num">★12,073 · 1,585/周</span></li>
+<li><span class="sh">星排 14 ← 下载排 208 （差 194 位）</span><a href="https://github.com/strukto-ai/mirage" target="_blank" rel="noopener">strukto-ai/mirage</a><span class="num">★3,724 · 370/周</span></li>
 <li><span class="sh">星排 15 ← 下载排 162 （差 147 位）</span><a href="https://github.com/agentscope-ai/ReMe" target="_blank" rel="noopener">agentscope-ai/ReMe</a><span class="num">★3,678 · 638/周</span></li>
-<li><span class="sh">星排 98 ← 下载排 182 （差 84 位）</span><a href="https://github.com/omdsh-dev/dsh-data-agent" target="_blank" rel="noopener">omdsh-dev/dsh-data-agent</a><span class="num">★198 · 472/周</span></li>
-<li><span class="sh">星排 121 ← 下载排 188 （差 67 位）</span><a href="https://github.com/ZSeven-W/dsh-crew" target="_blank" rel="noopener">ZSeven-W/dsh-crew</a><span class="num">★157 · 434/周</span></li>
+<li><span class="sh">星排 17 ← 下载排 423 （差 406 位）</span><a href="https://github.com/Javis603/token-monitor" target="_blank" rel="noopener">Javis603/token-monitor</a><span class="num">★3,327 · 10/周</span></li>
+<li><span class="sh">星排 18 ← 下载排 161 （差 143 位）</span><a href="https://github.com/zilliztech/memsearch" target="_blank" rel="noopener">zilliztech/memsearch</a><span class="num">★2,782 · 649/周</span></li>
+<li><span class="sh">星排 25 ← 下载排 405 （差 380 位）</span><a href="https://github.com/mem9-ai/mem9" target="_blank" rel="noopener">mem9-ai/mem9</a><span class="num">★1,221 · 20/周</span></li>
+<li><span class="sh">星排 27 ← 下载排 108 （差 81 位）</span><a href="https://github.com/Miaotofu01/Study-Mate" target="_blank" rel="noopener">Miaotofu01/Study-Mate</a><span class="num">★1,138 · 1,337/周</span></li>
+<li><span class="sh">星排 28 ← 下载排 410 （差 382 位）</span><a href="https://github.com/paean-ai/deeptide" target="_blank" rel="noopener">paean-ai/deeptide</a><span class="num">★1,102 · 18/周</span></li>
+<li><span class="sh">星排 29 ← 下载排 407 （差 378 位）</span><a href="https://github.com/mindscale-noah/MindMemOS" target="_blank" rel="noopener">mindscale-noah/MindMemOS</a><span class="num">★917 · 19/周</span></li>
+<li><span class="sh">星排 31 ← 下载排 97 （差 66 位）</span><a href="https://github.com/LiPu-jpg/Openwrite" target="_blank" rel="noopener">LiPu-jpg/Openwrite</a><span class="num">★872 · 1,444/周</span></li>
   </ul>
 
   <h2>按真实周下载量排序（前 120）</h2>
