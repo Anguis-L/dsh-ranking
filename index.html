@@ -3,113 +3,281 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>DSH 插件推荐：按真实 npm 月下载量排名（20 个）</title>
-<meta name="description" content="DeepSeek Harness 插件推荐榜。依据 npm registry 官方月下载量，不是 GitHub 星数。含桌宠、终端、表格、记忆、费用统计等 20 个插件的月下载量、用途与安装方法。">
+<title>DSH 插件真实下载量榜：33,019 星的插件，每周只装 192 次</title>
+<meta name="description" content="DeepSeek Harness 插件按 npm 真实周下载量排名。21,745 个插件中，GitHub 星数与真实使用量的 Spearman 相关只有 0.535 —— 几乎所有榜单都按星数排，所以都排错了。含双数据样本的完整榜单与错位最大的插件。">
+<link rel="canonical" href="https://anguis-l.github.io/dsh-ranking/">
+<meta property="og:title" content="DSH 插件真实下载量榜：33,019 星的插件，每周只装 192 次">
+<meta property="og:description" content="21,745 个 DSH 插件，星数排名和真实使用排名差得很远。">
+<meta property="og:type" content="website">
+<link rel="sitemap" type="application/xml" href="/dsh-ranking/sitemap.xml">
 <style>
-:root{--bg:#0d1018;--card:#161b26;--fg:#eef2fa;--dim:#8290a8;--acc:#5ab4ff;--gold:#ffc44a;--grn:#64dca0;--line:#232b3a}
+:root{--bg:#0d1018;--card:#161b26;--fg:#eef2fa;--dim:#8290a8;--acc:#5ab4ff;
+--gold:#ffc44a;--grn:#64dca0;--red:#f06e6e;--line:#232b3a}
 *{box-sizing:border-box}
 body{margin:0;background:var(--bg);color:var(--fg);
 font:16px/1.65 -apple-system,"PingFang SC","Microsoft YaHei",sans-serif}
-.wrap{max-width:1000px;margin:0 auto;padding:48px 20px 80px}
-h1{font-size:32px;margin:0 0 6px;letter-spacing:-.5px}
+.wrap{max-width:1040px;margin:0 auto;padding:48px 20px 80px}
+h1{font-size:30px;margin:0 0 8px;letter-spacing:-.5px;line-height:1.3}
 h1 em{color:var(--acc);font-style:normal}
-.sub{color:var(--dim);margin:0 0 32px;font-size:15px}
-.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px;margin-bottom:28px}
-.stat{background:var(--card);border-radius:12px;padding:16px 18px}
-.stat .v{font-size:24px;font-weight:700;color:var(--acc)}
-.stat .k{color:var(--dim);font-size:13px;margin-top:2px}
+h2{font-size:21px;margin:38px 0 14px;padding-bottom:8px;border-bottom:1px solid var(--line)}
+.sub{color:var(--dim);margin:0 0 26px;font-size:15px}
+.sub b{color:var(--fg)}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(132px,1fr));gap:12px;margin-bottom:26px}
+.stat{background:var(--card);border-radius:12px;padding:15px 17px}
+.stat .v{font-size:23px;font-weight:700;color:var(--acc)}
+.stat .k{color:var(--dim);font-size:12.5px;margin-top:2px}
 table{width:100%;border-collapse:collapse;background:var(--card);border-radius:12px;overflow:hidden}
-th{text-align:left;padding:12px 14px;font-size:13px;color:var(--dim);
+th{text-align:left;padding:11px 13px;font-size:12.5px;color:var(--dim);
 border-bottom:1px solid var(--line);font-weight:600}
-td{padding:11px 14px;border-bottom:1px solid #1b2230;font-size:14px;vertical-align:top}
+td{padding:10px 13px;border-bottom:1px solid #1b2230;font-size:14px;vertical-align:top}
 tr:last-child td{border-bottom:none}
-td.r{color:var(--dim);width:42px}
-td.n{width:210px} td.n b{font-weight:600} td.n code{background:#1e2635;padding:1px 6px;
-border-radius:4px;font-size:12px;color:var(--dim)}
+td.r{color:var(--dim);width:40px}
+td.n{width:190px} td.n a{color:var(--fg);text-decoration:none;font-weight:600}
+td.n a:hover{color:var(--acc)} td.n code{background:#1e2635;padding:1px 5px;
+border-radius:4px;font-size:11.5px;color:var(--dim)}
 td.d{color:var(--gold);text-align:right;font-variant-numeric:tabular-nums;
-white-space:nowrap;width:96px}
-td.c{color:#a8b4c8;font-size:13px}
-td.g{width:78px}
-.tag{display:inline-block;padding:2px 8px;border-radius:5px;font-size:12px}
-.t-tools{background:#1d3a5c;color:#7cc0ff} .t-ui{background:#2b2450;color:#b39dff}
-.t-tool{background:#1d4034;color:#7ce0b0} .t-memory{background:#3d3320;color:#e8c27c}
-.t-fun{background:#42262e;color:#ff9aa8} .t-provider{background:#2b3550;color:#9fb0e0}
-.t-workflow{background:#253d3a;color:#8fd8cc} .t-session{background:#33283d;color:#c6a3e0}
-.t-notify{background:#3d2c2c;color:#e0a3a3} .t-dev{background:#2a2f3d;color:#a8b4c8}
+white-space:nowrap;width:88px;font-weight:600}
+td.s{color:#9fb0c8;text-align:right;font-variant-numeric:tabular-nums;
+white-space:nowrap;width:80px;font-size:13px}
+td.s .sr{color:#5c6a80;font-size:11.5px}
+td.c{color:#8f9cb2;font-size:12.5px;line-height:1.5}
+td.m{font-size:12px;white-space:nowrap;width:104px}
+.lead{background:linear-gradient(135deg,#16283a,#1b1a30);border:1px solid #2a3d54;
+border-radius:14px;padding:22px 24px;margin-bottom:26px}
+.lead p{margin:0 0 10px;font-size:16px} .lead p:last-child{margin:0}
+.lead b{color:var(--gold)}
+.lead .big{font-size:19px;color:var(--fg)}
+ul.shifts{list-style:none;padding:0;margin:0}
+ul.shifts li{background:var(--card);border-radius:9px;padding:10px 14px;margin-bottom:7px;
+font-size:14px;display:flex;flex-wrap:wrap;gap:8px;align-items:baseline}
+ul.shifts a{color:var(--acc);text-decoration:none;font-weight:600}
+ul.shifts a:hover{text-decoration:underline}
+ul.shifts .sh{color:var(--dim);font-size:12.5px;min-width:172px}
+ul.shifts .num{color:#7c8aa0;font-size:12.5px;margin-left:auto;font-variant-numeric:tabular-nums}
 .note{background:#1a1520;border-left:3px solid #e0705a;border-radius:0 8px 8px 0;
 padding:14px 18px;margin:26px 0;font-size:14px;color:#d8c0bc}
 .how{background:var(--card);border-radius:12px;padding:20px 22px;margin:26px 0}
-.how h3{margin:0 0 10px;font-size:17px}
 .how code{display:block;background:#10151f;padding:10px 12px;border-radius:8px;
 font-family:Consolas,monospace;font-size:13px;color:#7ce0b0;overflow-x:auto;margin:8px 0}
-footer{margin-top:40px;padding-top:22px;border-top:1px solid #1b2230;color:var(--dim);font-size:13px}
+footer{margin-top:40px;padding-top:22px;border-top:1px solid var(--line);color:var(--dim);font-size:13px}
 footer a{color:var(--acc)}
 </style>
 </head>
 <body>
 <div class="wrap">
-  <h1>DSH 插件推荐：<em>按真实月下载量排名</em></h1>
-  <p class="sub">DeepSeek Harness 有 6000 多个插件。这份榜单只按 npm 上每个包<strong>每月真实的下载次数</strong>排 —— 不是 GitHub 星数，星数能刷，下载量刷不了。</p>
+  <h1>DSH 插件<em>真实下载量</em>榜：<br>33,019 星的插件，每周只装 192 次</h1>
+  <p class="sub">
+    DeepSeek Harness 生态有 <b>21,745</b> 个插件。几乎所有榜单都按 <b>GitHub 星数</b> 排 ——
+    但星数衡量的是仓库获得的关注，<b>下载量</b>才衡量真正发生的安装。
+    在 424 个同时有两项数据的样本上，两者的秩相关只有 <b>0.535</b>。
+  </p>
 
-  <div class="stats">
-    <div class="stat"><div class="v">20</div><div class="k">收录插件数</div></div>
-    <div class="stat"><div class="v">240,032</div><div class="k">合计月下载</div></div>
-    <div class="stat"><div class="v">5,299</div><div class="k">中位数 / 月</div></div>
-    <div class="stat"><div class="v">npm</div><div class="k">数据来源</div></div>
+  <div class="lead">
+    <p class="big">最扎眼的三个：</p>
+    <p><b>anywhere-labs/dsh-desktop</b> —— <b>33,019</b> 星，星排第 <b>4</b>，
+       每周只被装 <b>192</b> 次。</p>
+    <p><b>ranxianglei/billion-context</b> —— 每周 <b>595,244</b> 次下载，
+       星数只有 <b>2,724</b>，星排第 <b>19</b>，
+       下载排第 <b>1</b>。</p>
+    <p>而排第 3 的 <b>dsh-market</b>，每周被装 <b>175,241</b> 次，
+       是它星数排名的 6 倍不止。</p>
   </div>
 
+  <div class="stats">
+    <div class="stat"><div class="v">21,745</div><div class="k">生态插件总数</div></div>
+    <div class="stat"><div class="v">424</div><div class="k">双数据样本</div></div>
+    <div class="stat"><div class="v">0.535</div><div class="k">★ 与下载的相关</div></div>
+    <div class="stat"><div class="v">23</div><div class="k">星数中位</div></div>
+    <div class="stat"><div class="v">339</div><div class="k">下载中位</div></div>
+    <div class="stat"><div class="v">2,519,533</div><div class="k">样本周下载合计</div></div>
+  </div>
+
+  <h2>被星数严重低估的插件</h2>
+  <ul class="shifts">
+<li><span class="sh">星排 95 → 下载排 4 （差 91 位）</span><a href="https://github.com/MichengAI/dsh-codex-ui" target="_blank" rel="noopener">MichengAI/dsh-codex-ui</a><span class="num">★207 · 125,903/周</span></li>
+<li><span class="sh">星排 84 → 下载排 5 （差 79 位）</span><a href="https://github.com/MichengAI/dsh-archive-manager" target="_blank" rel="noopener">MichengAI/dsh-archive-manager</a><span class="num">★236 · 118,535/周</span></li>
+<li><span class="sh">星排 109 → 下载排 6 （差 103 位）</span><a href="https://github.com/MichengAI/dsh-agency-agents" target="_blank" rel="noopener">MichengAI/dsh-agency-agents</a><span class="num">★177 · 96,481/周</span></li>
+<li><span class="sh">星排 156 → 下载排 7 （差 149 位）</span><a href="https://github.com/MichengAI/dsh-im-connect" target="_blank" rel="noopener">MichengAI/dsh-im-connect</a><span class="num">★93 · 93,042/周</span></li>
+<li><span class="sh">星排 281 → 下载排 10 （差 271 位）</span><a href="https://github.com/MichengAI/dsh-codex-pet" target="_blank" rel="noopener">MichengAI/dsh-codex-pet</a><span class="num">★6 · 53,547/周</span></li>
+<li><span class="sh">星排 106 → 下载排 33 （差 73 位）</span><a href="https://github.com/flymysql/dsh-remote" target="_blank" rel="noopener">flymysql/dsh-remote</a><span class="num">★182 · 6,930/周</span></li>
+<li><span class="sh">星排 102 → 下载排 35 （差 67 位）</span><a href="https://github.com/SiriLee/dsh-rewind" target="_blank" rel="noopener">SiriLee/dsh-rewind</a><span class="num">★187 · 6,356/周</span></li>
+<li><span class="sh">星排 124 → 下载排 36 （差 88 位）</span><a href="https://github.com/wqty123/dsh-browser" target="_blank" rel="noopener">wqty123/dsh-browser</a><span class="num">★145 · 6,176/周</span></li>
+<li><span class="sh">星排 334 → 下载排 38 （差 296 位）</span><a href="https://github.com/unifilitence/dsh-notify-say" target="_blank" rel="noopener">unifilitence/dsh-notify-say</a><span class="num">★3 · 5,791/周</span></li>
+<li><span class="sh">星排 167 → 下载排 40 （差 127 位）</span><a href="https://github.com/duhu2000/dsh-mcp-connector" target="_blank" rel="noopener">duhu2000/dsh-mcp-connector</a><span class="num">★82 · 5,682/周</span></li>
+<li><span class="sh">星排 173 → 下载排 42 （差 131 位）</span><a href="https://github.com/Aa728848/dsh-chatgpt-subscription" target="_blank" rel="noopener">Aa728848/dsh-chatgpt-subscription</a><span class="num">★75 · 4,772/周</span></li>
+<li><span class="sh">星排 119 → 下载排 44 （差 75 位）</span><a href="https://github.com/tencent-connect/dsh-qqbot" target="_blank" rel="noopener">tencent-connect/dsh-qqbot</a><span class="num">★161 · 4,445/周</span></li>
+  </ul>
+
+  <h2>被星数严重高估的插件</h2>
+  <ul class="shifts">
+<li><span class="sh">星排 5 ← 下载排 92 （差 87 位）</span><a href="https://github.com/MemTensor/MemOS" target="_blank" rel="noopener">MemTensor/MemOS</a><span class="num">★12,073 · 1,585/周</span></li>
+<li><span class="sh">星排 31 ← 下载排 97 （差 66 位）</span><a href="https://github.com/LiPu-jpg/Openwrite" target="_blank" rel="noopener">LiPu-jpg/Openwrite</a><span class="num">★872 · 1,444/周</span></li>
+<li><span class="sh">星排 36 ← 下载排 103 （差 67 位）</span><a href="https://github.com/omdsh-dev/dsh-browser" target="_blank" rel="noopener">omdsh-dev/dsh-browser</a><span class="num">★756 · 1,378/周</span></li>
+<li><span class="sh">星排 27 ← 下载排 108 （差 81 位）</span><a href="https://github.com/Miaotofu01/Study-Mate" target="_blank" rel="noopener">Miaotofu01/Study-Mate</a><span class="num">★1,138 · 1,337/周</span></li>
+<li><span class="sh">星排 41 ← 下载排 128 （差 87 位）</span><a href="https://github.com/Clearailhc/clearai-dsh" target="_blank" rel="noopener">Clearailhc/clearai-dsh</a><span class="num">★666 · 1,053/周</span></li>
+<li><span class="sh">星排 3 ← 下载排 137 （差 134 位）</span><a href="https://github.com/Tencent/WeKnora" target="_blank" rel="noopener">Tencent/WeKnora</a><span class="num">★35,302 · 871/周</span></li>
+<li><span class="sh">星排 88 ← 下载排 148 （差 60 位）</span><a href="https://github.com/weijiafu14/pi2dsh" target="_blank" rel="noopener">weijiafu14/pi2dsh</a><span class="num">★218 · 691/周</span></li>
+<li><span class="sh">星排 60 ← 下载排 150 （差 90 位）</span><a href="https://github.com/Alice-Marx/dsh-model-router" target="_blank" rel="noopener">Alice-Marx/dsh-model-router</a><span class="num">★372 · 687/周</span></li>
+<li><span class="sh">星排 18 ← 下载排 161 （差 143 位）</span><a href="https://github.com/zilliztech/memsearch" target="_blank" rel="noopener">zilliztech/memsearch</a><span class="num">★2,782 · 649/周</span></li>
+<li><span class="sh">星排 15 ← 下载排 162 （差 147 位）</span><a href="https://github.com/agentscope-ai/ReMe" target="_blank" rel="noopener">agentscope-ai/ReMe</a><span class="num">★3,678 · 638/周</span></li>
+<li><span class="sh">星排 98 ← 下载排 182 （差 84 位）</span><a href="https://github.com/omdsh-dev/dsh-data-agent" target="_blank" rel="noopener">omdsh-dev/dsh-data-agent</a><span class="num">★198 · 472/周</span></li>
+<li><span class="sh">星排 121 ← 下载排 188 （差 67 位）</span><a href="https://github.com/ZSeven-W/dsh-crew" target="_blank" rel="noopener">ZSeven-W/dsh-crew</a><span class="num">★157 · 434/周</span></li>
+  </ul>
+
+  <h2>按真实周下载量排序（前 120）</h2>
   <table>
-    <thead><tr><th>#</th><th>插件</th><th style="text-align:right">月下载</th><th>用来做什么</th><th>类别</th></tr></thead>
+    <thead><tr><th>#</th><th>插件</th><th style="text-align:right">周下载</th>
+    <th style="text-align:right">星数</th><th>说明</th><th>错位</th></tr></thead>
     <tbody>
-      <tr><td class="r">1</td><td class="n"><b>大肥鱼桌宠</b><br><code>dsh-pet</code></td><td class="d">85,710</td><td class="c">在屏幕上溜达、玩魔方、打盹的桌面宠物</td><td class="g"><span class="tag t-fun">fun</span></td></tr>
-      <tr><td class="r">2</td><td class="n"><b>表格文档</b><br><code>dsh-univer-office</code></td><td class="d">45,043</td><td class="c">生成、读取、编辑 xlsx / PDF / pptx</td><td class="g"><span class="tag t-tools">tools</span></td></tr>
-      <tr><td class="r">3</td><td class="n"><b>插件市场</b><br><code>dsh-plugin</code></td><td class="d">24,921</td><td class="c">社区插件市场：搜索、浏览、一键安装</td><td class="g"><span class="tag t-ui">ui</span></td></tr>
-      <tr><td class="r">4</td><td class="n"><b>会话内找插件</b><br><code>dsh-find-plugin</code></td><td class="d">22,038</td><td class="c">在会话里直接搜插件，返回安装命令</td><td class="g"><span class="tag t-tools">tools</span></td></tr>
-      <tr><td class="r">5</td><td class="n"><b>记账</b><br><code>dsh-bill-ilife</code></td><td class="d">7,800</td><td class="c">把消费记录交给 AI 整理</td><td class="g"><span class="tag t-tool">tool</span></td></tr>
-      <tr><td class="r">6</td><td class="n"><b>统一管理面板</b><br><code>dsh-plugin-tool-management</code></td><td class="d">6,953</td><td class="c">一个面板管 MCP、技能、记忆、预设</td><td class="g"><span class="tag t-tool">tool</span></td></tr>
-      <tr><td class="r">7</td><td class="n"><b>任务板</b><br><code>dsh-taskboard</code></td><td class="d">5,978</td><td class="c">Agent 优先的任务板，自己认领推进</td><td class="g"><span class="tag t-workflow">workflow</span></td></tr>
-      <tr><td class="r">8</td><td class="n"><b>跨会话记忆</b><br><code>dsh-memento</code></td><td class="d">5,966</td><td class="c">同一件事不用重复说第二遍</td><td class="g"><span class="tag t-memory">memory</span></td></tr>
-      <tr><td class="r">9</td><td class="n"><b>多平台余额</b><br><code>dsh-subusage</code></td><td class="d">5,799</td><td class="c">DeepSeek / Kimi / 火山方舟 / Codex 余额</td><td class="g"><span class="tag t-provider">provider</span></td></tr>
-      <tr><td class="r">10</td><td class="n"><b>视频工作台</b><br><code>dsh-hyperframes</code></td><td class="d">5,299</td><td class="c">技能、模板、素材与 MP4 导出</td><td class="g"><span class="tag t-tool">tool</span></td></tr>
-      <tr><td class="r">11</td><td class="n"><b>deja-vu 记忆</b><br><code>dsh-deja</code></td><td class="d">5,034</td><td class="c">会话历史记忆插件</td><td class="g"><span class="tag t-tool">tool</span></td></tr>
-      <tr><td class="r">12</td><td class="n"><b>费用统计</b><br><code>dsh-bill</code></td><td class="d">4,173</td><td class="c">会话费用行与成本归因报告</td><td class="g"><span class="tag t-tool">tool</span></td></tr>
-      <tr><td class="r">13</td><td class="n"><b>改消息</b><br><code>dsh-edit-turn</code></td><td class="d">3,537</td><td class="c">就地编辑会话里的任意一条消息</td><td class="g"><span class="tag t-session">session</span></td></tr>
-      <tr><td class="r">14</td><td class="n"><b>翻译</b><br><code>dsh-translate</code></td><td class="d">3,176</td><td class="c">供应商参数翻译与确定性 JSON</td><td class="g"><span class="tag t-tools">tools</span></td></tr>
-      <tr><td class="r">15</td><td class="n"><b>文件编码治理</b><br><code>dsh-fs-encoding</code></td><td class="d">2,882</td><td class="c">受控的读 / 写 / 编辑 / grep</td><td class="g"><span class="tag t-dev">dev</span></td></tr>
-      <tr><td class="r">16</td><td class="n"><b>多通道通知</b><br><code>dsh-hybrid-notify</code></td><td class="d">1,791</td><td class="c">把事件送到你指定的地方</td><td class="g"><span class="tag t-notify">notify</span></td></tr>
-      <tr><td class="r">17</td><td class="n"><b>终端界面</b><br><code>dsh-tui</code></td><td class="d">1,730</td><td class="c">在终端里用 DeepSeek Harness</td><td class="g"><span class="tag t-ui">ui</span></td></tr>
-      <tr><td class="r">18</td><td class="n"><b>上下文压缩</b><br><code>dsh-hypercompact</code></td><td class="d">1,342</td><td class="c">按字节预算做确定性压缩，不烧 token</td><td class="g"><span class="tag t-tool">tool</span></td></tr>
-      <tr><td class="r">19</td><td class="n"><b>脱敏</b><br><code>dsh-privmask</code></td><td class="d">771</td><td class="c">在出口拦截请求，脱敏本地敏感信息</td><td class="g"><span class="tag t-dev">dev</span></td></tr>
-      <tr><td class="r">20</td><td class="n"><b>上下文守卫</b><br><code>dsh-context-guard</code></td><td class="d">89</td><td class="c">长会话越跑越贵时的读数提醒</td><td class="g"><span class="tag t-tool">tool</span></td></tr>
+<tr><td class="r">1</td><td class="n"><a href="https://github.com/ranxianglei/billion-context" target="_blank" rel="noopener">billion-context</a><br><code>ranxianglei/billion-context</code></td><td class="d">595,244</td><td class="s">2,724<br><span class="sr">星排 19</span></td><td class="c">上下文压缩插件，小窗口够用（100K 上下文足矣），省 token（省 5 倍），单会话能撑数月（几十亿 token）。billion-co</td><td class="m" style="color:#6b7a94">—</td></tr>
+<tr><td class="r">2</td><td class="n"><a href="https://github.com/morluto/rea" target="_blank" rel="noopener">rea</a><br><code>morluto/rea</code></td><td class="d">397,275</td><td class="s">380,824<br><span class="sr">星排 1</span></td><td class="c">用智能体逆向工程任何东西，从应用行为到原生二进制。</td><td class="m" style="color:#6b7a94">—</td></tr>
+<tr><td class="r">3</td><td class="n"><a href="https://github.com/dsh-market/dsh-market" target="_blank" rel="noopener">dsh-market</a><br><code>dsh-market/dsh-market</code></td><td class="d">175,241</td><td class="s">8,698<br><span class="sr">星排 6</span></td><td class="c">DeepSeek Harness 内置插件市场，可浏览、搜索、一键安装 · DSH 可视化插件市场</td><td class="m" style="color:#6b7a94">—</td></tr>
+<tr><td class="r">4</td><td class="n"><a href="https://github.com/MichengAI/dsh-codex-ui" target="_blank" rel="noopener">dsh-codex-ui</a><br><code>MichengAI/dsh-codex-ui</code></td><td class="d">125,903</td><td class="s">207<br><span class="sr">星排 95</span></td><td class="c">DSH Codex UI — 为 DeepSeek Harness Web 提供 Codex 风格侧栏、工作区会话树、全局搜索和轮次导航 ·</td><td class="m" style="color:#64dca0">★ 星数严重低估</td></tr>
+<tr><td class="r">5</td><td class="n"><a href="https://github.com/MichengAI/dsh-archive-manager" target="_blank" rel="noopener">dsh-archive-manager</a><br><code>MichengAI/dsh-archive-manager</code></td><td class="d">118,535</td><td class="s">236<br><span class="sr">星排 84</span></td><td class="c">DSH Archive Manager — 在 DeepSeek Harness 中安全查看、恢复和管理已归档会话 · 在 DSH 中安全查</td><td class="m" style="color:#64dca0">★ 星数严重低估</td></tr>
+<tr><td class="r">6</td><td class="n"><a href="https://github.com/MichengAI/dsh-agency-agents" target="_blank" rel="noopener">dsh-agency-agents</a><br><code>MichengAI/dsh-agency-agents</code></td><td class="d">96,481</td><td class="s">177<br><span class="sr">星排 109</span></td><td class="c">DSH Agency Agents — 为 DeepSeek Harness 提供 321 名可召唤的专业智能体 · 321 名可召唤的领域</td><td class="m" style="color:#64dca0">★ 星数严重低估</td></tr>
+<tr><td class="r">7</td><td class="n"><a href="https://github.com/MichengAI/dsh-im-connect" target="_blank" rel="noopener">dsh-im-connect</a><br><code>MichengAI/dsh-im-connect</code></td><td class="d">93,042</td><td class="s">93<br><span class="sr">星排 156</span></td><td class="c">DSH IM Connect — 把主流即时通讯平台接入本机 DeepSeek Harness，让本地智能体连上各大消息平台</td><td class="m" style="color:#64dca0">★ 星数严重低估</td></tr>
+<tr><td class="r">8</td><td class="n"><a href="https://github.com/MichengAI/dsh-skills-manager" target="_blank" rel="noopener">dsh-skills-manager</a><br><code>MichengAI/dsh-skills-manager</code></td><td class="d">92,748</td><td class="s">331<br><span class="sr">星排 65</span></td><td class="c">DSH Skills Manager — 在 DeepSeek Harness 中统一加载并安全管理本机智能体技能 · 在 DSH 中加载并</td><td class="m" style="color:#6b7a94">—</td></tr>
+<tr><td class="r">9</td><td class="n"><a href="https://github.com/MeteorNOX/DeepSeek-Balance-Whale-Widget" target="_blank" rel="noopener">DeepSeek-Balance-Whale-Widget</a><br><code>MeteorNOX/DeepSeek-Balance-Whale-Widget</code></td><td class="d">53,699</td><td class="s">4,571<br><span class="sr">星排 8</span></td><td class="c">DeepSeek Harness（DSH）一只住在 DSH 界面右下角的小鲸鱼娘，帮你盯着DeepSeek账户余额。QQ弹弹，支持拖拽吸附、</td><td class="m" style="color:#6b7a94">—</td></tr>
+<tr><td class="r">10</td><td class="n"><a href="https://github.com/MichengAI/dsh-codex-pet" target="_blank" rel="noopener">dsh-codex-pet</a><br><code>MichengAI/dsh-codex-pet</code></td><td class="d">53,547</td><td class="s">6<br><span class="sr">星排 281</span></td><td class="c">DSH Codex Pet：给 DeepSeek Harness 加上宠物陪伴、多任务提醒与互动，还能用技能自定义宠物。</td><td class="m" style="color:#64dca0">★ 星数严重低估</td></tr>
+<tr><td class="r">11</td><td class="n"><a href="https://github.com/omdsh-dev/DSH-better-sidebar" target="_blank" rel="noopener">DSH-better-sidebar</a><br><code>omdsh-dev/DSH-better-sidebar</code></td><td class="d">48,564</td><td class="s">4,495<br><span class="sr">星排 9</span></td><td class="c">开放侧边栏底座，支持三方拓展注册新侧边栏页面。内置文件渲染编辑、终端、侧边对话、Git、子代理页面</td><td class="m" style="color:#6b7a94">—</td></tr>
+<tr><td class="r">12</td><td class="n"><a href="https://github.com/PC2005-cloud/dsh-pet" target="_blank" rel="noopener">dsh-pet</a><br><code>PC2005-cloud/dsh-pet</code></td><td class="d">46,041</td><td class="s">4,027<br><span class="sr">星排 12</span></td><td class="c">DSH 桌面宠物：一行命令装好即用的透明动画小桌宠，支持多开、大小位置随心配置；还内置 DIY 素材链，能用 AI 视频自造专属宠物</td><td class="m" style="color:#6b7a94">—</td></tr>
+<tr><td class="r">13</td><td class="n"><a href="https://github.com/bowenliang123/dsh-context" target="_blank" rel="noopener">dsh-context</a><br><code>bowenliang123/dsh-context</code></td><td class="d">42,100</td><td class="s">3,585<br><span class="sr">星排 16</span></td><td class="c">DeepSeek Harness 上最好用的上下文洞察与管理插件，带上下文面板、浏览器、侧栏和上下文命令，可查看上下文统计、组成、明细、演进</td><td class="m" style="color:#6b7a94">—</td></tr>
+<tr><td class="r">14</td><td class="n"><a href="https://github.com/Han-1413141/dsh-cost-meter" target="_blank" rel="noopener">dsh-cost-meter</a><br><code>Han-1413141/dsh-cost-meter</code></td><td class="d">24,941</td><td class="s">533<br><span class="sr">星排 51</span></td><td class="c">DeepSeek Harness 成本追踪：会话与模型花费、token 用量、预算、服务商余额、编码套餐额度。中英双语界面。</td><td class="m" style="color:#6b7a94">—</td></tr>
+<tr><td class="r">15</td><td class="n"><a href="https://github.com/liustack/modlens" target="_blank" rel="noopener">modlens</a><br><code>liustack/modlens</code></td><td class="d">24,353</td><td class="s">4,430<br><span class="sr">星排 10</span></td><td class="c">DeepSeek Harness 首个视觉插件，也是每个纯文本编程智能体的视觉桥梁。粘贴图片，得到结构化 JSON 证据（OCR、版面、语义</td><td class="m" style="color:#6b7a94">—</td></tr>
+<tr><td class="r">16</td><td class="n"><a href="https://github.com/corrinehu/dsh-workbuddy-connect" target="_blank" rel="noopener">dsh-workbuddy-connect</a><br><code>corrinehu/dsh-workbuddy-connect</code></td><td class="d">23,512</td><td class="s">1,604<br><span class="sr">星排 24</span></td><td class="c">把 WorkBuddy 桌面 App 里的模型自动接入 DeepSeek Harness，零配置直接用。</td><td class="m" style="color:#6b7a94">—</td></tr>
+<tr><td class="r">17</td><td class="n"><a href="https://github.com/T-Auto/dsh-ops" target="_blank" rel="noopener">dsh-ops</a><br><code>T-Auto/dsh-ops</code></td><td class="d">21,613</td><td class="s">4,178<br><span class="sr">星排 11</span></td><td class="c">DSH 底层操作工具插件，用来减少 token 消耗、缩短任务耗时</td><td class="m" style="color:#6b7a94">—</td></tr>
+<tr><td class="r">18</td><td class="n"><a href="https://github.com/elysia395/dsh-wallpaper-engine" target="_blank" rel="noopener">dsh-wallpaper-engine</a><br><code>elysia395/dsh-wallpaper-engine</code></td><td class="d">20,379</td><td class="s">2,507<br><span class="sr">星排 20</span></td><td class="c">把本机 Wallpaper Engine 的壁纸搬进 DSH 网页界面：场景壁纸由内置 MIT 开源引擎 WebWallGL 实时 WebG</td><td class="m" style="color:#6b7a94">—</td></tr>
+<tr><td class="r">19</td><td class="n"><a href="https://github.com/kenryu42/cc-safety-net" target="_blank" rel="noopener">cc-safety-net</a><br><code>kenryu42/cc-safety-net</code></td><td class="d">17,141</td><td class="s">1,773<br><span class="sr">星排 23</span></td><td class="c">AI 编码智能体的执行前守卫，在工具调用运行前拦截破坏性 Git 和文件系统命令，以及常见的敏感文件访问尝试。支持 Amp Code、Ant</td><td class="m" style="color:#6b7a94">—</td></tr>
+<tr><td class="r">20</td><td class="n"><a href="https://github.com/DDDMUC/dsh-free-search" target="_blank" rel="noopener">dsh-free-search</a><br><code>DDDMUC/dsh-free-search</code></td><td class="d">14,509</td><td class="s">608<br><span class="sr">星排 44</span></td><td class="c">为 DeepSeek Harness 提供免费网页搜索，后端用 DuckDuckGo，无需 API key</td><td class="m" style="color:#6b7a94">—</td></tr>
+<tr><td class="r">21</td><td class="n"><a href="https://github.com/omdsh-dev/dsh-mnemon" target="_blank" rel="noopener">dsh-mnemon</a><br><code>omdsh-dev/dsh-mnemon</code></td><td class="d">14,185</td><td class="s">706<br><span class="sr">星排 37</span></td><td class="c">为 DeepSeek Harness 打造可组合、基于视图的记忆，源与策略皆可插拔，开箱即用三层记忆。</td><td class="m" style="color:#6b7a94">—</td></tr>
+<tr><td class="r">22</td><td class="n"><a href="https://github.com/liustack/modsearch" target="_blank" rel="noopener">modsearch</a><br><code>liustack/modsearch</code></td><td class="d">13,158</td><td class="s">758<br><span class="sr">星排 35</span></td><td class="c">🥇 DeepSeek Harness 上最强的免费联网搜索插件，也是所有没有原生联网能力的模型的搜索桥。免费、免注册、免 API key。问</td><td class="m" style="color:#6b7a94">—</td></tr>
+<tr><td class="r">23</td><td class="n"><a href="https://github.com/dingminhua/dsh-connect-workbuddy" target="_blank" rel="noopener">dsh-connect-workbuddy</a><br><code>dingminhua/dsh-connect-workbuddy</code></td><td class="d">12,409</td><td class="s">600<br><span class="sr">星排 47</span></td><td class="c">把本地已登录的 WorkBuddy 模型接入 DeepSeek Harness，提供只读额度总览和模型管理。</td><td class="m" style="color:#6b7a94">—</td></tr>
+<tr><td class="r">24</td><td class="n"><a href="https://github.com/tt-a1i/archify" target="_blank" rel="noopener">archify</a><br><code>tt-a1i/archify</code></td><td class="d">11,559</td><td class="s">88,767<br><span class="sr">星排 2</span></td><td class="c">智能体技能，画出漂亮、可验证的架构图、工作流图、时序图、数据流图和生命周期图——自带 HTML，有动效，导出清晰。</td><td class="m" style="color:#6b7a94">—</td></tr>
+<tr><td class="r">25</td><td class="n"><a href="https://github.com/ccch1mneyyy/dsh-TUI" target="_blank" rel="noopener">dsh-TUI</a><br><code>ccch1mneyyy/dsh-TUI</code></td><td class="d">11,482</td><td class="s">5,664<br><span class="sr">星排 7</span></td><td class="c">DSH 官方首推的 TUI 插件，高性能低占用，可爱像素鲸鱼，流畅鼠标交互，npm 一键安装</td><td class="m" style="color:#6b7a94">—</td></tr>
+<tr><td class="r">26</td><td class="n"><a href="https://github.com/NanmiCoder/dsh-agent-teams" target="_blank" rel="noopener">dsh-agent-teams</a><br><code>NanmiCoder/dsh-agent-teams</code></td><td class="d">11,316</td><td class="s">2,356<br><span class="sr">星排 21</span></td><td class="c">DeepSeek Harness 的 AgentTeams 插件</td><td class="m" style="color:#6b7a94">—</td></tr>
+<tr><td class="r">27</td><td class="n"><a href="https://github.com/omdsh-dev/dsh-genui" target="_blank" rel="noopener">dsh-genui</a><br><code>omdsh-dev/dsh-genui</code></td><td class="d">9,626</td><td class="s">773<br><span class="sr">星排 34</span></td><td class="c">DeepSeek Harness 的 GenUI：用 dsh-ui 围栏在助手回复里内联渲染交互式 UI 组件——布局、图表、绘图、表单、测</td><td class="m" style="color:#6b7a94">—</td></tr>
+<tr><td class="r">28</td><td class="n"><a href="https://github.com/dream-num/dsh-univer-office" target="_blank" rel="noopener">dsh-univer-office</a><br><code>dream-num/dsh-univer-office</code></td><td class="d">8,795</td><td class="s">493<br><span class="sr">星排 53</span></td><td class="c">给 DeepSeek Harness 一个真正的办公环境。Univer Office 插件把表格、文档、幻灯片、画布、关系表等塞进同一个运行</td><td class="m" style="color:#6b7a94">—</td></tr>
+<tr><td class="r">29</td><td class="n"><a href="https://github.com/shanliuling/dsh-image-gen" target="_blank" rel="noopener">dsh-image-gen</a><br><code>shanliuling/dsh-image-gen</code></td><td class="d">7,908</td><td class="s">699<br><span class="sr">星排 39</span></td><td class="c">DeepSeek Harness 的 AI 图像工作室——在聊天里生成、编辑、对比图片，内置 500+ 提示词、图库、多模型工作流和 Com</td><td class="m" style="color:#6b7a94">—</td></tr>
+<tr><td class="r">30</td><td class="n"><a href="https://github.com/ysr666/dsh-vision-router" target="_blank" rel="noopener">dsh-vision-router</a><br><code>ysr666/dsh-vision-router</code></td><td class="d">7,822</td><td class="s">1,172<br><span class="sr">星排 26</span></td><td class="c">给纯文本 DeepSeek Harness 智能体装上眼睛：内置免费视觉链（无需密钥）+ 像素级视觉工具（问答、定位、裁剪、像素比对、取色、</td><td class="m" style="color:#6b7a94">—</td></tr>
+<tr><td class="r">31</td><td class="n"><a href="https://github.com/Nwflower/dsh-claude-style" target="_blank" rel="noopener">dsh-claude-style</a><br><code>Nwflower/dsh-claude-style</code></td><td class="d">7,717</td><td class="s">318<br><span class="sr">星排 66</span></td><td class="c">Claude Code 桌面主题，专为 DeepSeek Harness 网页 GUI 打造</td><td class="m" style="color:#6b7a94">—</td></tr>
+<tr><td class="r">32</td><td class="n"><a href="https://github.com/RevolutionLA/dsh-dream-skin" target="_blank" rel="noopener">dsh-dream-skin</a><br><code>RevolutionLA/dsh-dream-skin</code></td><td class="d">7,198</td><td class="s">277<br><span class="sr">星排 72</span></td><td class="c">DeepSeek Harness 换肤 / 壁纸 / 主题包插件 (dsh-plugin) — 8 套 Mirage 主题、每用户强调色、壁</td><td class="m" style="color:#6b7a94">—</td></tr>
+<tr><td class="r">33</td><td class="n"><a href="https://github.com/flymysql/dsh-remote" target="_blank" rel="noopener">dsh-remote</a><br><code>flymysql/dsh-remote</code></td><td class="d">6,930</td><td class="s">182<br><span class="sr">星排 106</span></td><td class="c">远程办公助手，面向 DeepSeek Harness（DSH）：连接 SSH（密钥或密码），选远程工作区，用 rw_* 工具操作，再通过 S</td><td class="m" style="color:#64dca0">★ 星数严重低估</td></tr>
+<tr><td class="r">34</td><td class="n"><a href="https://github.com/c1overzz/dsh-bili-scroll" target="_blank" rel="noopener">dsh-bili-scroll</a><br><code>c1overzz/dsh-bili-scroll</code></td><td class="d">6,863</td><td class="s">809<br><span class="sr">星排 33</span></td><td class="c">DSH 插件：每天替你刷一轮 B站，读字幕挑出值得的、写一份日报，值得的 @ 你</td><td class="m" style="color:#6b7a94">—</td></tr>
+<tr><td class="r">35</td><td class="n"><a href="https://github.com/SiriLee/dsh-rewind" target="_blank" rel="noopener">dsh-rewind</a><br><code>SiriLee/dsh-rewind</code></td><td class="d">6,356</td><td class="s">187<br><span class="sr">星排 102</span></td><td class="c">DSH 插件：在同一个窗口里轻松回退对话，从不新建分支；自带轻量工作区备份，回退时一并还原文件（Claude Code /rewind 语义</td><td class="m" style="color:#64dca0">★ 星数严重低估</td></tr>
+<tr><td class="r">36</td><td class="n"><a href="https://github.com/wqty123/dsh-browser" target="_blank" rel="noopener">dsh-browser</a><br><code>wqty123/dsh-browser</code></td><td class="d">6,176</td><td class="s">145<br><span class="sr">星排 124</span></td><td class="c">DeepSeek Harness 共享真实浏览器插件</td><td class="m" style="color:#64dca0">★ 星数严重低估</td></tr>
+<tr><td class="r">37</td><td class="n"><a href="https://github.com/yyh-001/dsh-meme" target="_blank" rel="noopener">dsh-meme</a><br><code>yyh-001/dsh-meme</code></td><td class="d">5,899</td><td class="s">354<br><span class="sr">星排 61</span></td><td class="c">DeepSeek Harness 的表情包插件——找得到、发得出、学得会，纯文本斗图、情绪主动发图、像 QQ/微信 一样发图、AI 自动学图</td><td class="m" style="color:#6b7a94">—</td></tr>
+<tr><td class="r">38</td><td class="n"><a href="https://github.com/unifilitence/dsh-notify-say" target="_blank" rel="noopener">dsh-notify-say</a><br><code>unifilitence/dsh-notify-say</code></td><td class="d">5,791</td><td class="s">3<br><span class="sr">星排 334</span></td><td class="c">DSH Desktop 的桌面通知真的会说话：Windows TTS 开箱即用，VOICEVOX 语音包可选，还有空闲门控，会等子代理跑完再</td><td class="m" style="color:#64dca0">★ 星数严重低估</td></tr>
+<tr><td class="r">39</td><td class="n"><a href="https://github.com/WSL043/dsh-codex-subscription" target="_blank" rel="noopener">dsh-codex-subscription</a><br><code>WSL043/dsh-codex-subscription</code></td><td class="d">5,785</td><td class="s">258<br><span class="sr">星排 76</span></td><td class="c">用 OAuth 把 ChatGPT / Codex 订阅接到 DeepSeek Harness，支持模型访问、用量配额、搜索和图像生成，无需</td><td class="m" style="color:#6b7a94">—</td></tr>
+<tr><td class="r">40</td><td class="n"><a href="https://github.com/duhu2000/dsh-mcp-connector" target="_blank" rel="noopener">dsh-mcp-connector</a><br><code>duhu2000/dsh-mcp-connector</code></td><td class="d">5,682</td><td class="s">82<br><span class="sr">星排 167</span></td><td class="c">DeepSeek Harness MCP 连接器：连接服务器、跨活跃连接搜索工具、排查发现故障。内置持续更新的目录；支持 OAuth 2.0</td><td class="m" style="color:#64dca0">★ 星数严重低估</td></tr>
+<tr><td class="r">41</td><td class="n"><a href="https://github.com/Fei2411/DS-Bot" target="_blank" rel="noopener">DS-Bot</a><br><code>Fei2411/DS-Bot</code></td><td class="d">4,898</td><td class="s">3,843<br><span class="sr">星排 13</span></td><td class="c">给 DeepSeek Harness 的一组常驻智能体，含主智能体、智能体互发消息和群聊。</td><td class="m" style="color:#6b7a94">—</td></tr>
+<tr><td class="r">42</td><td class="n"><a href="https://github.com/Aa728848/dsh-chatgpt-subscription" target="_blank" rel="noopener">dsh-chatgpt-subscription</a><br><code>Aa728848/dsh-chatgpt-subscription</code></td><td class="d">4,772</td><td class="s">75<br><span class="sr">星排 173</span></td><td class="c"></td><td class="m" style="color:#64dca0">★ 星数严重低估</td></tr>
+<tr><td class="r">43</td><td class="n"><a href="https://github.com/saya-ch/dsh-mobile" target="_blank" rel="noopener">dsh-mobile</a><br><code>saya-ch/dsh-mobile</code></td><td class="d">4,762</td><td class="s">605<br><span class="sr">星排 46</span></td><td class="c">DeepSeek Harness 的 Android App 与安全远程访问插件，支持局域网/远程连接和高度自定义的移动界面与扩展能力。</td><td class="m" style="color:#6b7a94">—</td></tr>
+<tr><td class="r">44</td><td class="n"><a href="https://github.com/tencent-connect/dsh-qqbot" target="_blank" rel="noopener">dsh-qqbot</a><br><code>tencent-connect/dsh-qqbot</code></td><td class="d">4,445</td><td class="s">161<br><span class="sr">星排 119</span></td><td class="c">让 QQ Bot 接入 DeepSeek Harness（dsh）的官方插件</td><td class="m" style="color:#64dca0">★ 星数严重低估</td></tr>
+<tr><td class="r">45</td><td class="n"><a href="https://github.com/dingminhua/dsh-connect-trae" target="_blank" rel="noopener">dsh-connect-trae</a><br><code>dingminhua/dsh-connect-trae</code></td><td class="d">4,261</td><td class="s">159<br><span class="sr">星排 120</span></td><td class="c">把本地已登录的 Trae 模型接入 DeepSeek Harness，附带只读额度概览。</td><td class="m" style="color:#64dca0">★ 星数严重低估</td></tr>
+<tr><td class="r">46</td><td class="n"><a href="https://github.com/xiajiajun516/dsh-config-manager" target="_blank" rel="noopener">dsh-config-manager</a><br><code>xiajiajun516/dsh-config-manager</code></td><td class="d">4,120</td><td class="s">240<br><span class="sr">星排 82</span></td><td class="c">DeepSeek Harness（DSH）备份还原插件——导出、导入、迁移并同步完整 DSH 配置、插件、MCP 服务器、技能和工作区，一键</td><td class="m" style="color:#6b7a94">—</td></tr>
+<tr><td class="r">47</td><td class="n"><a href="https://github.com/huaweicloud/huaweicloud-devkit" target="_blank" rel="noopener">huaweicloud-devkit</a><br><code>huaweicloud/huaweicloud-devkit</code></td><td class="d">3,835</td><td class="s">69<br><span class="sr">星排 181</span></td><td class="c">华为云官方插件，面向 AI 智能体：技能、MCP 工具、安全护栏和云沙箱，帮 AI 智能体在华为云上安全地构建、部署和运维。</td><td class="m" style="color:#64dca0">★ 星数严重低估</td></tr>
+<tr><td class="r">48</td><td class="n"><a href="https://github.com/Noob-stupid/dsh-plugin-gating-hub" target="_blank" rel="noopener">dsh-plugin-gating-hub</a><br><code>Noob-stupid/dsh-plugin-gating-hub</code></td><td class="d">3,792</td><td class="s">111<br><span class="sr">星排 145</span></td><td class="c">DSH 插件：框架升级安全 + 插件门控——升级前契约预检、回滚点、失败自动回滚、有确凿证据才自动禁用；另带多源插件市场。非官方。</td><td class="m" style="color:#64dca0">★ 星数严重低估</td></tr>
+<tr><td class="r">49</td><td class="n"><a href="https://github.com/FuRongJun-1999/dsh-memory" target="_blank" rel="noopener">dsh-memory</a><br><code>FuRongJun-1999/dsh-memory</code></td><td class="d">3,412</td><td class="s">469<br><span class="sr">星排 55</span></td><td class="c">白箱AGI架构探索：元认知（自我认知循环）、持续学习（知识飞轮）、世界模型（条件空间+语义时空图）、自我改进（自举纪律）、零LLM白箱管线与</td><td class="m" style="color:#6b7a94">—</td></tr>
+<tr><td class="r">50</td><td class="n"><a href="https://github.com/awesome-dsh-plugin/dsh-find-plugin" target="_blank" rel="noopener">dsh-find-plugin</a><br><code>awesome-dsh-plugin/dsh-find-plugin</code></td><td class="d">3,251</td><td class="s">146<br><span class="sr">星排 123</span></td><td class="c">在智能体里查找 DSH 插件：实时搜索 GitHub 的 dsh-plugin 话题，按 star 排名</td><td class="m" style="color:#64dca0">★ 星数严重低估</td></tr>
+<tr><td class="r">51</td><td class="n"><a href="https://github.com/Fisfzy/dsh-ego-browser" target="_blank" rel="noopener">dsh-ego-browser</a><br><code>Fisfzy/dsh-ego-browser</code></td><td class="d">3,181</td><td class="s">307<br><span class="sr">星排 68</span></td><td class="c">DSH（DeepSeek Harness）插件：把 ego-lite 浏览器（给 AI Agent 用的 Chromium）接入 HARNE</td><td class="m" style="color:#6b7a94">—</td></tr>
+<tr><td class="r">52</td><td class="n"><a href="https://github.com/Phant0Meow/dsh-meow-memory" target="_blank" rel="noopener">dsh-meow-memory</a><br><code>Phant0Meow/dsh-meow-memory</code></td><td class="d">3,085</td><td class="s">249<br><span class="sr">星排 79</span></td><td class="c">DeepSeek Harness 的跨会话记忆插件：七层 SQLite 存储（soul/user/project/fact/lesson/t</td><td class="m" style="color:#6b7a94">—</td></tr>
+<tr><td class="r">53</td><td class="n"><a href="https://github.com/zaofan-make/dsh-qqbot" target="_blank" rel="noopener">dsh-qqbot</a><br><code>zaofan-make/dsh-qqbot</code></td><td class="d">3,082</td><td class="s">103<br><span class="sr">星排 151</span></td><td class="c">AI 统管 QQ 群组：审核放行、群发文件、沟通其他web会话的ai！ 气氛组担当：表情包自动入库，AI 自己决定开口，多预设多人格轮班陪聊</td><td class="m" style="color:#64dca0">★ 星数严重低估</td></tr>
+<tr><td class="r">54</td><td class="n"><a href="https://github.com/Mars-Sea/dsh-commandcode-provider" target="_blank" rel="noopener">dsh-commandcode-provider</a><br><code>Mars-Sea/dsh-commandcode-provider</code></td><td class="d">3,056</td><td class="s">434<br><span class="sr">星排 58</span></td><td class="c">DeepSeek Harness（dsh）的 Command Code 服务商插件。接入 Command Code 模型，支持实时模型目录、</td><td class="m" style="color:#6b7a94">—</td></tr>
+<tr><td class="r">55</td><td class="n"><a href="https://github.com/gitroomhq/postiz-agent" target="_blank" rel="noopener">postiz-agent</a><br><code>gitroomhq/postiz-agent</code></td><td class="d">3,020</td><td class="s">536<br><span class="sr">星排 50</span></td><td class="c">Postiz Agents 命令行——接上 Claude / OpenClaw 等，就能定时发社交媒体帖子 🤖</td><td class="m" style="color:#6b7a94">—</td></tr>
+<tr><td class="r">56</td><td class="n"><a href="https://github.com/dickpy/dsh-imagegen" target="_blank" rel="noopener">dsh-imagegen</a><br><code>dickpy/dsh-imagegen</code></td><td class="d">3,010</td><td class="s">138<br><span class="sr">星排 127</span></td><td class="c">DSH（DeepSeek Harness）Web GUI AI 生图插件：走 OpenAI 兼容端点（gpt-image-2）做文生图与图生</td><td class="m" style="color:#64dca0">★ 星数严重低估</td></tr>
+<tr><td class="r">57</td><td class="n"><a href="https://github.com/kenz1117/dsh-ui-usage-billing" target="_blank" rel="noopener">dsh-ui-usage-billing</a><br><code>kenz1117/dsh-ui-usage-billing</code></td><td class="d">2,988</td><td class="s">90<br><span class="sr">星排 160</span></td><td class="c">DeepSeek Harness 用量计费面板插件：侧边栏费用指标、从会话日志真实聚合用量、当前多服务商价格目录</td><td class="m" style="color:#64dca0">★ 星数严重低估</td></tr>
+<tr><td class="r">58</td><td class="n"><a href="https://github.com/Anionex/dsh-vision-toolkit" target="_blank" rel="noopener">dsh-vision-toolkit</a><br><code>Anionex/dsh-vision-toolkit</code></td><td class="d">2,977</td><td class="s">905<br><span class="sr">星排 30</span></td><td class="c">[dsh] 给纯文本模型配一套更强的视觉工具箱：一行命令安装即用、粘贴图片直接识别、多图问答、截图还原前端 UI 等｜为 agent-vis</td><td class="m" style="color:#6b7a94">—</td></tr>
+<tr><td class="r">59</td><td class="n"><a href="https://github.com/Yu-tao-Li/dsh-computer-use-win" target="_blank" rel="noopener">dsh-computer-use-win</a><br><code>Yu-tao-Li/dsh-computer-use-win</code></td><td class="d">2,865</td><td class="s">175<br><span class="sr">星排 110</span></td><td class="c">DeepSeek Harness（dsh）的 Windows 电脑操作：MCP stdio 服务 + PowerShell UIA 后端，2</td><td class="m" style="color:#6b7a94">—</td></tr>
+<tr><td class="r">60</td><td class="n"><a href="https://github.com/Nwflower/dsh-chat-import" target="_blank" rel="noopener">dsh-chat-import</a><br><code>Nwflower/dsh-chat-import</code></td><td class="d">2,784</td><td class="s">251<br><span class="sr">星排 77</span></td><td class="c">把 25+ AI 编程智能体的对话记录导入 DeepSeek Harness，作为可恢复的会话继续对话，工具调用、推理与结果原样保留，还支持</td><td class="m" style="color:#6b7a94">—</td></tr>
+<tr><td class="r">61</td><td class="n"><a href="https://github.com/yannicksong0106/dsh-550c-boot" target="_blank" rel="noopener">dsh-550c-boot</a><br><code>yannicksong0106/dsh-550c-boot</code></td><td class="d">2,624</td><td class="s">183<br><span class="sr">星排 105</span></td><td class="c">550C 开机动画 for DeepSeek Harness — 首帧由宿主半边注入，DSH 的 Loading 卡片不露脸；桌面原生标题栏</td><td class="m" style="color:#6b7a94">—</td></tr>
+<tr><td class="r">62</td><td class="n"><a href="https://github.com/Microqian2th/dsh-codex-effort-slider" target="_blank" rel="noopener">dsh-codex-effort-slider</a><br><code>Microqian2th/dsh-codex-effort-slider</code></td><td class="d">2,532</td><td class="s">153<br><span class="sr">星排 122</span></td><td class="c">Codex 风格的推理等级滑条（DeepSeek Harness 插件）：可拖动连续滑条 + 高档位渐变星尘特效</td><td class="m" style="color:#64dca0">★ 星数严重低估</td></tr>
+<tr><td class="r">63</td><td class="n"><a href="https://github.com/xing-shuyin/pi-web-ui" target="_blank" rel="noopener">pi-web-ui</a><br><code>xing-shuyin/pi-web-ui</code></td><td class="d">2,509</td><td class="s">337<br><span class="sr">星排 62</span></td><td class="c">打开浏览器，活儿全干完。</td><td class="m" style="color:#6b7a94">—</td></tr>
+<tr><td class="r">64</td><td class="n"><a href="https://github.com/kingOfSoySauce/dsh-skin-market" target="_blank" rel="noopener">dsh-skin-market</a><br><code>kingOfSoySauce/dsh-skin-market</code></td><td class="d">2,501</td><td class="s">259<br><span class="sr">星排 75</span></td><td class="c">DeepSeek Harness skin market 皮肤市场 已收录200+DSH 皮肤 完善评分系统加人工审核，有便捷的社区收录入口</td><td class="m" style="color:#6b7a94">—</td></tr>
+<tr><td class="r">65</td><td class="n"><a href="https://github.com/anysearch-team/anysearch-dsh" target="_blank" rel="noopener">anysearch-dsh</a><br><code>anysearch-team/anysearch-dsh</code></td><td class="d">2,468</td><td class="s">457<br><span class="sr">星排 56</span></td><td class="c">AnySearch 网页搜索服务商，为 DeepSeek Harness（DSH）提供高级搜索工具</td><td class="m" style="color:#6b7a94">—</td></tr>
+<tr><td class="r">66</td><td class="n"><a href="https://github.com/Something11235/dsh-video-skin" target="_blank" rel="noopener">dsh-video-skin</a><br><code>Something11235/dsh-video-skin</code></td><td class="d">2,466</td><td class="s">60<br><span class="sr">星排 186</span></td><td class="c">DSH 视频皮肤：聊天背景 + 有声开机动画 + 界面内透明度调节</td><td class="m" style="color:#64dca0">★ 星数严重低估</td></tr>
+<tr><td class="r">67</td><td class="n"><a href="https://github.com/chromoany/dsh-notify-me" target="_blank" rel="noopener">dsh-notify-me</a><br><code>chromoany/dsh-notify-me</code></td><td class="d">2,413</td><td class="s">59<br><span class="sr">星排 187</span></td><td class="c">DSH 桌面消息提醒插件 / desktop notification and message alerts for DeepSeek Ha</td><td class="m" style="color:#64dca0">★ 星数严重低估</td></tr>
+<tr><td class="r">68</td><td class="n"><a href="https://github.com/Ikalus1988/MisakaNet" target="_blank" rel="noopener">MisakaNet</a><br><code>Ikalus1988/MisakaNet</code></td><td class="d">2,340</td><td class="s">543<br><span class="sr">星排 49</span></td><td class="c">📚 零依赖、由 git 支撑的微课程库，让 AI 智能体异步分享并检索经过验证的调试经验。| https://misakanet.org</td><td class="m" style="color:#6b7a94">—</td></tr>
+<tr><td class="r">69</td><td class="n"><a href="https://github.com/liguobao/ds-harness-remote" target="_blank" rel="noopener">ds-harness-remote</a><br><code>liguobao/ds-harness-remote</code></td><td class="d">2,328</td><td class="s">840<br><span class="sr">星排 32</span></td><td class="c">基于 DeepSeek Harness 插件机制构建的多端远程访问方案，走安全、低延迟、端到端加密的 P2P 优先网络，让你从 PC、And</td><td class="m" style="color:#6b7a94">—</td></tr>
+<tr><td class="r">70</td><td class="n"><a href="https://github.com/PerryLink/dsh-mcp-panel" target="_blank" rel="noopener">dsh-mcp-panel</a><br><code>PerryLink/dsh-mcp-panel</code></td><td class="d">2,296</td><td class="s">89<br><span class="sr">星排 162</span></td><td class="c">官方 DeepSeek Harness MCP 客户端的 MCP 管理台：/mcp 命令带健康诊断和管线试调用，设置里的 MCP 标签页支持</td><td class="m" style="color:#64dca0">★ 星数严重低估</td></tr>
+<tr><td class="r">71</td><td class="n"><a href="https://github.com/chen731215-dev/dsh-muv-engine" target="_blank" rel="noopener">dsh-muv-engine</a><br><code>chen731215-dev/dsh-muv-engine</code></td><td class="d">2,242</td><td class="s">3<br><span class="sr">星排 335</span></td><td class="c">DSH 原生 MUV 引擎——酒馆伴侣：正则脚本执行、变量状态追踪、iframe 状态栏渲染，PolyForm-Noncommercial-</td><td class="m" style="color:#64dca0">★ 星数严重低估</td></tr>
+<tr><td class="r">72</td><td class="n"><a href="https://github.com/XDTrees/dsh-xdpool" target="_blank" rel="noopener">dsh-xdpool</a><br><code>XDTrees/dsh-xdpool</code></td><td class="d">2,223</td><td class="s">251<br><span class="sr">星排 78</span></td><td class="c">把 WorkBuddy 桌面 App 里登录过的所有账号（国内版和国际版都支持），合成一个 DSH 模型池。你在 WorkBuddy 里登过</td><td class="m" style="color:#6b7a94">—</td></tr>
+<tr><td class="r">73</td><td class="n"><a href="https://github.com/xiufengsun/TokenTracker" target="_blank" rel="noopener">TokenTracker</a><br><code>xiufengsun/TokenTracker</code></td><td class="d">2,195</td><td class="s">2,127<br><span class="sr">星排 22</span></td><td class="c">本地优先的 AI token 用量与成本追踪器，覆盖 Claude Code、Codex、Cursor、Gemini、DeepSeek Ha</td><td class="m" style="color:#6b7a94">—</td></tr>
+<tr><td class="r">74</td><td class="n"><a href="https://github.com/chen731215-dev/dsh-tavern-v2" target="_blank" rel="noopener">dsh-tavern-v2</a><br><code>chen731215-dev/dsh-tavern-v2</code></td><td class="d">2,096</td><td class="s">53<br><span class="sr">星排 191</span></td><td class="c">DeepSeek Harness 酒馆插件——角色卡扮演、世界书管理、预设切换、暗色主题、记忆摘要、关系图谱，采用 PolyForm-Non</td><td class="m" style="color:#64dca0">★ 星数严重低估</td></tr>
+<tr><td class="r">75</td><td class="n"><a href="https://github.com/lhuans/dsh-genui" target="_blank" rel="noopener">dsh-genui</a><br><code>lhuans/dsh-genui</code></td><td class="d">2,089</td><td class="s">5<br><span class="sr">星排 296</span></td><td class="c">DeepSeek Harness 的 GenUI：在助手回复里内联渲染交互式图表、表单、计算器、仪表盘和迷你应用，操作还能回传给模型。</td><td class="m" style="color:#64dca0">★ 星数严重低估</td></tr>
+<tr><td class="r">76</td><td class="n"><a href="https://github.com/PerryLink/dsh-auto-review" target="_blank" rel="noopener">dsh-auto-review</a><br><code>PerryLink/dsh-auto-review</code></td><td class="d">2,019</td><td class="s">240<br><span class="sr">星排 83</span></td><td class="c">DeepSeek Harness 审批请求的第二模型 AI 自动复核：只读的复核子代理返回带理由的结构化允许/拒绝判定，默认失败即拒绝，全程</td><td class="m" style="color:#6b7a94">—</td></tr>
+<tr><td class="r">77</td><td class="n"><a href="https://github.com/wenbin-wb/dsh-bridge" target="_blank" rel="noopener">dsh-bridge</a><br><code>wenbin-wb/dsh-bridge</code></td><td class="d">1,961</td><td class="s">214<br><span class="sr">星排 89</span></td><td class="c">🚀 DeepSeek Harness 多通道远程访问与安全守护插件 | 局域网扫码直连、Cloudflare / 自建公网隧道、微信 / Q</td><td class="m" style="color:#6b7a94">—</td></tr>
+<tr><td class="r">78</td><td class="n"><a href="https://github.com/TencentCloud/tencentmeeting-cli" target="_blank" rel="noopener">tencentmeeting-cli</a><br><code>TencentCloud/tencentmeeting-cli</code></td><td class="d">1,899</td><td class="s">248<br><span class="sr">星排 80</span></td><td class="c">腾讯会议命令行工具（CLI），基于腾讯会议开放平台 OAuth2 授权，支持会议管理、录制管理、参会报告等功能。</td><td class="m" style="color:#6b7a94">—</td></tr>
+<tr><td class="r">79</td><td class="n"><a href="https://github.com/Scorp1o117/dsh-motion-ui" target="_blank" rel="noopener">dsh-motion-ui</a><br><code>Scorp1o117/dsh-motion-ui</code></td><td class="d">1,883</td><td class="s">35<br><span class="sr">星排 204</span></td><td class="c">为 DeepSeek Harness Web 提供交互式 UI、HTML/SVG 图表与动画</td><td class="m" style="color:#64dca0">★ 星数严重低估</td></tr>
+<tr><td class="r">80</td><td class="n"><a href="https://github.com/NoNameLeGo/dsh-catppuccin-theme" target="_blank" rel="noopener">dsh-catppuccin-theme</a><br><code>NoNameLeGo/dsh-catppuccin-theme</code></td><td class="d">1,863</td><td class="s">67<br><span class="sr">星排 183</span></td><td class="c">DeepSeek Harness Web GUI 的 Catppuccin 主题插件：Latte / Frappé / Macchiato </td><td class="m" style="color:#64dca0">★ 星数严重低估</td></tr>
+<tr><td class="r">81</td><td class="n"><a href="https://github.com/PerryLink/dsh-research-report" target="_blank" rel="noopener">dsh-research-report</a><br><code>PerryLink/dsh-research-report</code></td><td class="d">1,849</td><td class="s">213<br><span class="sr">星排 90</span></td><td class="c">为 DeepSeek Harness 打造的可验证研究报告引擎：内容寻址的证据账本（声明与快照绑定、防篡改），加上带版本的密封报告，逐条声明</td><td class="m" style="color:#6b7a94">—</td></tr>
+<tr><td class="r">82</td><td class="n"><a href="https://github.com/yanzwzz/dsh-whale-girl-pet" target="_blank" rel="noopener">dsh-whale-girl-pet</a><br><code>yanzwzz/dsh-whale-girl-pet</code></td><td class="d">1,846</td><td class="s">28<br><span class="sr">星排 210</span></td><td class="c">🐋 DeepSeek 娘桌宠：住进 DeepSeek Harness Web 界面的蓝发鲸鱼女仆。工作链路、任务完成统计（用时/消耗/花费）</td><td class="m" style="color:#64dca0">★ 星数严重低估</td></tr>
+<tr><td class="r">83</td><td class="n"><a href="https://github.com/kingOfSoySauce/dsh-liang-skin" target="_blank" rel="noopener">dsh-liang-skin</a><br><code>kingOfSoySauce/dsh-liang-skin</code></td><td class="d">1,816</td><td class="s">296<br><span class="sr">星排 69</span></td><td class="c">DeepSeek Harness 滑动变阻器皮肤</td><td class="m" style="color:#6b7a94">—</td></tr>
+<tr><td class="r">84</td><td class="n"><a href="https://github.com/wssfk12138/dsh-damage-pulse" target="_blank" rel="noopener">dsh-damage-pulse</a><br><code>wssfk12138/dsh-damage-pulse</code></td><td class="d">1,794</td><td class="s">277<br><span class="sr">星排 73</span></td><td class="c">DeepSeek Harness Token 余额监控插件：鲸鱼娘待机/扣费/复苏动画、峰谷计费、连续扣费飘字与会话费用统计。</td><td class="m" style="color:#6b7a94">—</td></tr>
+<tr><td class="r">85</td><td class="n"><a href="https://github.com/A8Chann/dsh-pet-live2d" target="_blank" rel="noopener">dsh-pet-live2d</a><br><code>A8Chann/dsh-pet-live2d</code></td><td class="d">1,760</td><td class="s">54<br><span class="sr">星排 189</span></td><td class="c">DSH Web GUI 的 Live2D 桌宠插件：可拖动、跟随鼠标、跟着会话状态换动作与表情，右键面板可换装</td><td class="m" style="color:#64dca0">★ 星数严重低估</td></tr>
+<tr><td class="r">86</td><td class="n"><a href="https://github.com/AskTheWay/dsh-auto-memory" target="_blank" rel="noopener">dsh-auto-memory</a><br><code>AskTheWay/dsh-auto-memory</code></td><td class="d">1,679</td><td class="s">106<br><span class="sr">星排 149</span></td><td class="c">DeepSeek Harness（dsh）的 Claude Code 风格自动记忆插件：带类型的记忆文件 + MEMORY.md 索引，自动</td><td class="m" style="color:#64dca0">★ 星数严重低估</td></tr>
+<tr><td class="r">87</td><td class="n"><a href="https://github.com/V1ki/dsh-plugin-subscriptions" target="_blank" rel="noopener">dsh-plugin-subscriptions</a><br><code>V1ki/dsh-plugin-subscriptions</code></td><td class="d">1,666</td><td class="s">480<br><span class="sr">星排 54</span></td><td class="c">把 ChatGPT（Codex）、Claude 和 Grok（X Premium）订阅当作 DeepSeek Harness 的 LLM 服</td><td class="m" style="color:#6b7a94">—</td></tr>
+<tr><td class="r">88</td><td class="n"><a href="https://github.com/ZSeven-W/dsh-openpencil" target="_blank" rel="noopener">dsh-openpencil</a><br><code>ZSeven-W/dsh-openpencil</code></td><td class="d">1,658</td><td class="s">184<br><span class="sr">星排 103</span></td><td class="c">DeepSeek Harness 的 OpenPencil 插件——在对话里预览、检查、编辑真正的 .op 文档。</td><td class="m" style="color:#6b7a94">—</td></tr>
+<tr><td class="r">89</td><td class="n"><a href="https://github.com/diqierjia/StrataGate-AgentMemory" target="_blank" rel="noopener">StrataGate-AgentMemory</a><br><code>diqierjia/StrataGate-AgentMemory</code></td><td class="d">1,626</td><td class="s">125<br><span class="sr">星排 135</span></td><td class="c">近期记忆保持详细，旧记忆逐渐精简，重要记忆长期留存。</td><td class="m" style="color:#6b7a94">—</td></tr>
+<tr><td class="r">90</td><td class="n"><a href="https://github.com/GooDAnDReaDY/dsh-key-rotation" target="_blank" rel="noopener">dsh-key-rotation</a><br><code>GooDAnDReaDY/dsh-key-rotation</code></td><td class="d">1,600</td><td class="s">10<br><span class="sr">星排 252</span></td><td class="c">DeepSeek Harness 按服务商轮换 API key：密钥池、429 限流自动切换、冷却探测和设置界面</td><td class="m" style="color:#64dca0">★ 星数严重低估</td></tr>
+<tr><td class="r">91</td><td class="n"><a href="https://github.com/universe-st/dsh-game-material-master" target="_blank" rel="noopener">dsh-game-material-master</a><br><code>universe-st/dsh-game-material-master</code></td><td class="d">1,591</td><td class="s">93<br><span class="sr">星排 157</span></td><td class="c">dsh游戏素材大师插件。接入seedream生图模型和minimax视频生成模型，可生成各种游戏素材。</td><td class="m" style="color:#64dca0">★ 星数严重低估</td></tr>
+<tr><td class="r">92</td><td class="n"><a href="https://github.com/MemTensor/MemOS" target="_blank" rel="noopener">MemOS</a><br><code>MemTensor/MemOS</code></td><td class="d">1,585</td><td class="s">12,073<br><span class="sr">星排 5</span></td><td class="c">自进化记忆 OS，服务 LLM 与 AI 智能体：超持久记忆、混合检索、跨任务技能复用，省 35.24% token，支持 DeepSeek</td><td class="m" style="color:#f06e6e">★ 星数严重高估</td></tr>
+<tr><td class="r">93</td><td class="n"><a href="https://github.com/Duskriver/dsh-opencode-go" target="_blank" rel="noopener">dsh-opencode-go</a><br><code>Duskriver/dsh-opencode-go</code></td><td class="d">1,570</td><td class="s">178<br><span class="sr">星排 108</span></td><td class="c">让你的DSH完美适配opencodeg-go套餐</td><td class="m" style="color:#6b7a94">—</td></tr>
+<tr><td class="r">94</td><td class="n"><a href="https://github.com/UncleK/dsh-think-translate" target="_blank" rel="noopener">dsh-think-translate</a><br><code>UncleK/dsh-think-translate</code></td><td class="d">1,566</td><td class="s">51<br><span class="sr">星排 193</span></td><td class="c">DeepSeek Harness 思维链界面翻译：支持 8 种目标语言，优先用本地 Ollama 模型并可在面板内下载，Google/Bin</td><td class="m" style="color:#64dca0">★ 星数严重低估</td></tr>
+<tr><td class="r">95</td><td class="n"><a href="https://github.com/PerryLink/dsh-permission-rules" target="_blank" rel="noopener">dsh-permission-rules</a><br><code>PerryLink/dsh-permission-rules</code></td><td class="d">1,524</td><td class="s">121<br><span class="sr">星排 137</span></td><td class="c">给 DeepSeek Harness 加上 Claude Code 风格的声明式权限规则：在 tools/pre-execute 瀑布流上按</td><td class="m" style="color:#6b7a94">—</td></tr>
+<tr><td class="r">96</td><td class="n"><a href="https://github.com/Mzy123l/dsh-plugin-remote-access" target="_blank" rel="noopener">dsh-plugin-remote-access</a><br><code>Mzy123l/dsh-plugin-remote-access</code></td><td class="d">1,474</td><td class="s">3<br><span class="sr">星排 336</span></td><td class="c">为 DeepSeek Harness 桌面版提供「限网段 + 可选数字密码」的远程访问入口</td><td class="m" style="color:#64dca0">★ 星数严重低估</td></tr>
+<tr><td class="r">97</td><td class="n"><a href="https://github.com/LiPu-jpg/Openwrite" target="_blank" rel="noopener">Openwrite</a><br><code>LiPu-jpg/Openwrite</code></td><td class="d">1,444</td><td class="s">872<br><span class="sr">星排 31</span></td><td class="c">dsh-Openwrite：OpenWrite 的 DeepSeek Harness 小说创作插件，含统一创作 Agent、90 个小说工具</td><td class="m" style="color:#f06e6e">★ 星数严重高估</td></tr>
+<tr><td class="r">98</td><td class="n"><a href="https://github.com/Fishquito7/dsh-skill-mcp-panel" target="_blank" rel="noopener">dsh-skill-mcp-panel</a><br><code>Fishquito7/dsh-skill-mcp-panel</code></td><td class="d">1,437</td><td class="s">218<br><span class="sr">星排 87</span></td><td class="c">DSH Web UI 插件：技能与 MCP 管理（Web 界面的技能/MCP 管理工具）</td><td class="m" style="color:#6b7a94">—</td></tr>
+<tr><td class="r">99</td><td class="n"><a href="https://github.com/Totoro-qaq/dsh-plugin-bridge" target="_blank" rel="noopener">dsh-plugin-bridge</a><br><code>Totoro-qaq/dsh-plugin-bridge</code></td><td class="d">1,422</td><td class="s">163<br><span class="sr">星排 117</span></td><td class="c">DeepSeek Harness 插件，支持可预览的跨配置档会话迁移。固定 schema 的交接保留状态、源模型意图和未解析图片；原会话保持</td><td class="m" style="color:#6b7a94">—</td></tr>
+<tr><td class="r">100</td><td class="n"><a href="https://github.com/FSMargoo/dsh-at-file" target="_blank" rel="noopener">dsh-at-file</a><br><code>FSMargoo/dsh-at-file</code></td><td class="d">1,415</td><td class="s">503<br><span class="sr">星排 52</span></td><td class="c">为 DeepSeek Harness 加上 Codex 风格的 @文件 提及：在输入框里搜索工作区文件，把路径附到提示词中。</td><td class="m" style="color:#6b7a94">—</td></tr>
+<tr><td class="r">101</td><td class="n"><a href="https://github.com/PerryLink/dsh-memento" target="_blank" rel="noopener">dsh-memento</a><br><code>PerryLink/dsh-memento</code></td><td class="d">1,414</td><td class="s">141<br><span class="sr">星排 125</span></td><td class="c">为 DeepSeek Harness 提供有边界、分层、需审批、可审计的跨会话记忆（能力接缝：ctx.memory + SQLite 服务商</td><td class="m" style="color:#6b7a94">—</td></tr>
+<tr><td class="r">102</td><td class="n"><a href="https://github.com/liangmianya/dsh-synapse" target="_blank" rel="noopener">dsh-synapse</a><br><code>liangmianya/dsh-synapse</code></td><td class="d">1,412</td><td class="s">581<br><span class="sr">星排 48</span></td><td class="c">面向 DeepSeek Harness 的可视化非线性对话工作区插件；基于画布的会话浏览器与分支工作区。</td><td class="m" style="color:#6b7a94">—</td></tr>
+<tr><td class="r">103</td><td class="n"><a href="https://github.com/omdsh-dev/dsh-browser" target="_blank" rel="noopener">dsh-browser</a><br><code>omdsh-dev/dsh-browser</code></td><td class="d">1,378</td><td class="s">756<br><span class="sr">星排 36</span></td><td class="c">Chrome 侧边栏扩展，让 DeepSeek Harness 直接操控你的浏览器，无需视觉能力。</td><td class="m" style="color:#f06e6e">★ 星数严重高估</td></tr>
+<tr><td class="r">104</td><td class="n"><a href="https://github.com/yefengliu1/dsh-theme-songgrid" target="_blank" rel="noopener">dsh-theme-songgrid</a><br><code>yefengliu1/dsh-theme-songgrid</code></td><td class="d">1,354</td><td class="s">3<br><span class="sr">星排 337</span></td><td class="c">宋代美学 × 瑞士国际主义风格，用在 DeepSeek Harness 网页 UI 上——宣纸（浅色）与夜墨（深色）两版，青瓷承载交互状态，</td><td class="m" style="color:#64dca0">★ 星数严重低估</td></tr>
+<tr><td class="r">105</td><td class="n"><a href="https://github.com/Anionex/dsh-turn-rewind" target="_blank" rel="noopener">dsh-turn-rewind</a><br><code>Anionex/dsh-turn-rewind</code></td><td class="d">1,350</td><td class="s">134<br><span class="sr">星排 129</span></td><td class="c">DeepSeek Harness 对话与代码状态回退插件 | DSH —— 回退对话和工作区状态，由持久化变更账本驱动</td><td class="m" style="color:#6b7a94">—</td></tr>
+<tr><td class="r">106</td><td class="n"><a href="https://github.com/PerryLink/dsh-click" target="_blank" rel="noopener">dsh-click</a><br><code>PerryLink/dsh-click</code></td><td class="d">1,346</td><td class="s">21<br><span class="sr">星排 218</span></td><td class="c">DeepSeek Harness 跨平台原生桌面控制（优先 Windows）：screen_shot、screen_read、click/t</td><td class="m" style="color:#64dca0">★ 星数严重低估</td></tr>
+<tr><td class="r">107</td><td class="n"><a href="https://github.com/cv-superding/dsh-deepseek-web-login" target="_blank" rel="noopener">dsh-deepseek-web-login</a><br><code>cv-superding/dsh-deepseek-web-login</code></td><td class="d">1,342</td><td class="s">285<br><span class="sr">星排 70</span></td><td class="c">非官方 DSH（DeepSeek Harness）插件：把 chat.deepseek.com 网页模型接入为 LLM 服务商——浏览器登录</td><td class="m" style="color:#6b7a94">—</td></tr>
+<tr><td class="r">108</td><td class="n"><a href="https://github.com/Miaotofu01/Study-Mate" target="_blank" rel="noopener">Study-Mate</a><br><code>Miaotofu01/Study-Mate</code></td><td class="d">1,337</td><td class="s">1,138<br><span class="sr">星排 27</span></td><td class="c">你的AI学习搭档：定路线、讲知识、做项目，边学边做，学透一门科目</td><td class="m" style="color:#f06e6e">★ 星数严重高估</td></tr>
+<tr><td class="r">109</td><td class="n"><a href="https://github.com/LayneChai/superpowers-dsh" target="_blank" rel="noopener">superpowers-dsh</a><br><code>LayneChai/superpowers-dsh</code></td><td class="d">1,312</td><td class="s">108<br><span class="sr">星排 147</span></td><td class="c">为 DeepSeek Harness 打造的 Superpowers 技能：TDD、调试、规划与协作技能，改编自 obra/superpow</td><td class="m" style="color:#6b7a94">—</td></tr>
+<tr><td class="r">110</td><td class="n"><a href="https://github.com/HsiangNianian/dsh-auto-continue" target="_blank" rel="noopener">dsh-auto-continue</a><br><code>HsiangNianian/dsh-auto-continue</code></td><td class="d">1,290</td><td class="s">166<br><span class="sr">星排 114</span></td><td class="c">DSH Web UI plugin: auto-sends 「继续」 after non-human interruptions, with</td><td class="m" style="color:#6b7a94">—</td></tr>
+<tr><td class="r">111</td><td class="n"><a href="https://github.com/franksong2702/dsh-codex-connect" target="_blank" rel="noopener">dsh-codex-connect</a><br><code>franksong2702/dsh-codex-connect</code></td><td class="d">1,287</td><td class="s">168<br><span class="sr">星排 112</span></td><td class="c">用 ChatGPT OAuth 在 DeepSeek Harness 里调用 openai-codex 模型和图像生成。</td><td class="m" style="color:#6b7a94">—</td></tr>
+<tr><td class="r">112</td><td class="n"><a href="https://github.com/Tyan66666/billion-context-dsh" target="_blank" rel="noopener">billion-context-dsh</a><br><code>Tyan66666/billion-context-dsh</code></td><td class="d">1,286</td><td class="s">162<br><span class="sr">星排 118</span></td><td class="c">为 DeepSeek Harness 做模型驱动的上下文管理（主动上下文裁剪 / ACP）——由模型决定何时压缩、压缩什么。移植自 bill</td><td class="m" style="color:#6b7a94">—</td></tr>
+<tr><td class="r">113</td><td class="n"><a href="https://github.com/fandc520/dsh-comfyui" target="_blank" rel="noopener">dsh-comfyui</a><br><code>fandc520/dsh-comfyui</code></td><td class="d">1,252</td><td class="s">116<br><span class="sr">星排 140</span></td><td class="c">一个基于DeepSeek-Harness的ComfyUI插件</td><td class="m" style="color:#6b7a94">—</td></tr>
+<tr><td class="r">114</td><td class="n"><a href="https://github.com/cloader/dsh-taskboard" target="_blank" rel="noopener">dsh-taskboard</a><br><code>cloader/dsh-taskboard</code></td><td class="d">1,237</td><td class="s">70<br><span class="sr">星排 177</span></td><td class="c">deepseekharness 任务看板插件</td><td class="m" style="color:#64dca0">★ 星数严重低估</td></tr>
+<tr><td class="r">115</td><td class="n"><a href="https://github.com/Nagi-ovo/dsh-visualize" target="_blank" rel="noopener">dsh-visualize</a><br><code>Nagi-ovo/dsh-visualize</code></td><td class="d">1,184</td><td class="s">318<br><span class="sr">星排 67</span></td><td class="c">在 DSH 对话里渲染模型生成的交互式卡片，直接生成可交互的可视化内容。</td><td class="m" style="color:#6b7a94">—</td></tr>
+<tr><td class="r">116</td><td class="n"><a href="https://github.com/PerryLink/dsh-industry-research" target="_blank" rel="noopener">dsh-industry-research</a><br><code>PerryLink/dsh-industry-research</code></td><td class="d">1,175</td><td class="s">213<br><span class="sr">星排 91</span></td><td class="c">DeepSeek Harness 的行业与公司研究领域包：方法论技能、产业链梳理、公开来源政策/新闻追踪、公司研究卡片，以及可审计的研究报告</td><td class="m" style="color:#6b7a94">—</td></tr>
+<tr><td class="r">117</td><td class="n"><a href="https://github.com/d-dev0101/open-sea-skin" target="_blank" rel="noopener">open-sea-skin</a><br><code>d-dev0101/open-sea-skin</code></td><td class="d">1,165</td><td class="s">402<br><span class="sr">星排 59</span></td><td class="c">🌊 DeepSeek Harness 海洋皮肤与动态主题 | 实时海洋主题，波浪、日落与玻璃透明度均可调。DSH 插件 + Chrome/E</td><td class="m" style="color:#6b7a94">—</td></tr>
+<tr><td class="r">118</td><td class="n"><a href="https://github.com/HarmlessFunny/dsh-background-by-model" target="_blank" rel="noopener">dsh-background-by-model</a><br><code>HarmlessFunny/dsh-background-by-model</code></td><td class="d">1,160</td><td class="s">23<br><span class="sr">星排 212</span></td><td class="c">DeepSeek Harness 背景随当前模型而切换</td><td class="m" style="color:#64dca0">★ 星数严重低估</td></tr>
+<tr><td class="r">119</td><td class="n"><a href="https://github.com/lire1131/dsh-undo-savepoint" target="_blank" rel="noopener">dsh-undo-savepoint</a><br><code>lire1131/dsh-undo-savepoint</code></td><td class="d">1,148</td><td class="s">188<br><span class="sr">星排 101</span></td><td class="c">DSH 崩溃救援插件：撤销配置和插件代码改动，快照不碰密钥，一键进入安全模式，还带离线命令行和图形界面，DSH 起不来也能用。</td><td class="m" style="color:#6b7a94">—</td></tr>
+<tr><td class="r">120</td><td class="n"><a href="https://github.com/Ychris12138/dsh-usage-stats" target="_blank" rel="noopener">dsh-usage-stats</a><br><code>Ychris12138/dsh-usage-stats</code></td><td class="d">1,136</td><td class="s">184<br><span class="sr">星排 104</span></td><td class="c">DeepSeek Harness Web GUI（dsh web）的服务商余额、订阅配额和 token 用量分析。</td><td class="m" style="color:#6b7a94">—</td></tr>
     </tbody>
   </table>
 
   <div class="note">
-    <strong>怎么读这张表：</strong>下载量高的三个（桌宠、表格、插件市场）是<strong>基础能力</strong>，
-    装的人最多也最不容易坏；中后段都是解决具体问题但有前提的插件 —— 比如管理面板，
-    装到第 20 个插件时你才需要它。<br>
-    <strong>局限：</strong>下载量只说明<strong>有人在用</strong>，不说明好用；而且它会波动
-    （这张表抓取于 2026-10-26，同一插件不同月份能差好几倍）。
-    没有 npm 包的插件无法比较，不在这张表里。
+    <strong>怎么读这份榜：</strong>下载量高说明<strong>有人在用</strong>，不说明好用；
+    它还会波动（同一插件不同月份能差几倍）。没有 npm 包的插件无法比较，不在这份榜里。<br>
+    <strong>方法：</strong>插件清单与星数来自 dpharness.com 的公开 API，下载量来自 npm registry
+    官方 downloads 接口。样本是「两边都有数据」的那部分，<strong>不是随机抽样</strong> ——
+    冷门插件更容易缺数据，所以这份榜偏向有 npm 包的插件。
   </div>
 
   <div class="how">
-    <h3>怎么装这些插件</h3>
+    <h3>怎么装</h3>
     <p style="color:#a8b4c8;font-size:14px;margin:0 0 6px">
-      用官方文档给的 GitHub 直链在国内常常会卡在 <code style="display:inline;background:#10151f;padding:1px 5px;border-radius:4px">fetch failed</code>
-      —— 那是超时，不是命令写错。换一个能直连的地址前缀即可：
+      用 GitHub 直链在国内常会卡在 <code style="display:inline;background:#10151f;padding:1px 5px;border-radius:4px">fetch failed</code>
+      —— 那是超时，不是命令写错。换个能直连的地址前缀就行：
     </p>
     <code>dsh plugin --profile &lt;你的profile&gt; add https://ghproxy.net/https://github.com/OWNER/REPO/releases/download/vX.Y.Z/NAME-X.Y.Z.tgz</code>
     <p style="color:#a8b4c8;font-size:14px;margin:10px 0 0">
-      装完<strong>重启一次 dsh</strong>（插件是启动时组装的），然后在会话里直接让 agent 调用对应工具。
+      装完<strong>重启一次 dsh</strong>。想自己查别的插件排名，用
+      <a href="https://github.com/Anguis-L/dsh-plugin-adoption">dsh-plugin-adoption</a>。
     </p>
   </div>
 
   <footer>
-    数据：npm registry 官方月下载量接口，抓取于 2026-10-26，可复现。<br>
+    数据抓取于 2026-10-26，可复现。<br>
     相关：<a href="https://github.com/Anguis-L/dsh-plugin-adoption">dsh-plugin-adoption</a> ——
-    在会话里按真实下载量给插件排名、标出被星数低估的插件。<br>
-    <a href="https://github.com/Anguis-L/ai-self-funding">ai-self-funding</a> ——
+    在会话里按真实下载量给插件排名；<a href="https://github.com/Anguis-L/dsh-plugin-trust-audit">dsh-plugin-trust-audit</a> ——
+    审计插件路由是否真的做了鉴权栅栏；<a href="https://github.com/Anguis-L/ai-self-funding">ai-self-funding</a> ——
     一个 AI 尝试自己赚钱养活自己的实验记录。
   </footer>
 </div>
