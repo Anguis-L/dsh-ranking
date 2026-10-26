@@ -110,6 +110,17 @@ flex-wrap:wrap;gap:26px;align-items:baseline}
 .howto code{display:block;background:#10151f;padding:9px 12px;border-radius:7px;
 font-family:Consolas,monospace;font-size:13px;color:#7ce0b0;overflow-x:auto;margin:6px 0}
 
+
+  table.vl{width:100%;border-collapse:collapse;margin:14px 0 10px}
+  table.vl th,table.vl td{padding:9px 12px;border-bottom:1px solid #232c3d;text-align:left;font-size:13.5px}
+  table.vl th{color:#8b9ab5;font-weight:500;font-size:12.5px;white-space:nowrap}
+  table.vl td.r,table.vl th.r{white-space:nowrap;width:120px}
+  table.vl td:nth-child(2){width:auto}
+  table.vl td.r,table.vl th.r{text-align:right;font-variant-numeric:tabular-nums}
+  table.vl code{font-size:12.5px;color:#b9c6dd}
+  table.vl b.ok{color:#64dca0;font-weight:500}
+  table.vl b.warn{color:#ffb066;font-weight:500}
+  h3{margin:26px 0 8px;font-size:15px;color:#cfdbef;font-weight:600}
 </style>
 </head>
 <body>
@@ -148,7 +159,85 @@ font-family:Consolas,monospace;font-size:13px;color:#7ce0b0;overflow-x:auto;marg
 
 
 
-  <h2>站方那份下载量，已经过期多久了</h2>
+  
+  <h2>装得最多的那些，有多少在你这里根本装不上</h2>
+  <p>上面那些榜回答的是「有多少人在装」。但下载量高不等于<strong>你装得上</strong>。</p>
+  <p>DSH 插件用它 <code>package.json</code> 里 <code>peerDependencies</code> 的
+  <code>@deepseek-ai/dsh-tools</code> 声明「我要配哪条 tools 版本线」，对不上就报
+  <code>incompatible</code> —— 而多数人会把那当成网络问题，然后反复重装。</p>
+  <p>我把下载量最高的 60 个插件逐个查了它们声明的范围，和本机实际的
+  <code>0.2.1-rc.2</code> 比了一遍：</p>
+  <div class="stats">
+    <div class="stat"><div class="v" style="color:#f06e6e">27%</div><div class="k">有明确版本约束的插件里，在本机装不上的占比</div></div>
+    <div class="stat"><div class="v">13</div><div class="k">判定为装不上（有约束且不接受本机版本）</div></div>
+    <div class="stat"><div class="v" style="color:#ffb066">4</div><div class="k">连一个能装的已发布版本都没有</div></div>
+    <div class="stat"><div class="v">48/60</div><div class="k">拿到确定判定的 / 抽样总数</div></div>
+  </div>
+
+  <h3>装不上、而且下载量最高的几个</h3>
+  <table class="vl">
+    <thead><tr><th class="r">月下载</th><th>插件</th><th class="r">最高可装版本</th></tr></thead>
+    <tbody>
+      <tr>
+        <td class="r">5,892</td>
+        <td><code>awesome-dsh-plugin/dsh-find-plugin</code></td>
+        <td class="r"><b class="ok">0.1.0</b></td>
+      </tr>
+      <tr>
+        <td class="r">4,395</td>
+        <td><code>xiajiajun516/dsh-config-manager</code></td>
+        <td class="r"><b class="ok">0.1.84</b></td>
+      </tr>
+      <tr>
+        <td class="r">4,273</td>
+        <td><code>Nwflower/dsh-chat-import</code></td>
+        <td class="r"><b class="ok">0.2.0</b></td>
+      </tr>
+      <tr>
+        <td class="r">3,933</td>
+        <td><code>xmutfyh/dsh-plugin-writing-guard</code></td>
+        <td class="r"><b class="warn">无</b></td>
+      </tr>
+      <tr>
+        <td class="r">3,679</td>
+        <td><code>MichengAI/dsh-skills-manager</code></td>
+        <td class="r"><b class="warn">无</b></td>
+      </tr>
+      <tr>
+        <td class="r">3,325</td>
+        <td><code>trench-xinxin/dsh-tool-lens</code></td>
+        <td class="r"><b class="ok">2.0.5</b></td>
+      </tr>
+      <tr>
+        <td class="r">3,208</td>
+        <td><code>1e0zj/dsh-plugin-mall</code></td>
+        <td class="r"><b class="ok">0.4.17</b></td>
+      </tr>
+      <tr>
+        <td class="r">3,199</td>
+        <td><code>MichengAI/dsh-agency-agents</code></td>
+        <td class="r"><b class="warn">无</b></td>
+      </tr>
+    </tbody>
+  </table>
+  <p class="note">「最高可装版本」是按它自己声明的范围，从已发布版本里挑出的最新一个 ——
+  装 <code>&lt;包名&gt;@&lt;这个版本&gt;</code> 而不是默认的 latest，才可能装上。
+  「无」表示已发布版本全都不在它自己声明的范围内。</p>
+
+  <h3>为什么写通配符也不管用</h3>
+  <p>本机跑的是 <code>0.2.1-rc.2</code>，是预发布版本。semver 的规则是：
+  <strong>预发布版本只被「同一个 major.minor.patch 且范围里也写了预发布」的范围接受</strong>。
+  所以写 <code>*</code> 不接受它，写 <code>^0.2.1</code> 也不接受它，
+  只有 <code>^0.2.1-rc.1</code> 这种形状才接受。这与 npm 自己的行为一致，但确实反直觉。</p>
+
+  <h3>这组数字怎么来的</h3>
+  <p>用 <a href="https://github.com/Anguis-L/dsh-plugin-adoption">dsh-plugin-adoption</a>
+  v0.2.0 的版本线维度跑的。包名不是猜的 —— 只在 npm registry 元数据里的
+  <code>repository</code> 真的指回这个仓库时才采用，否则报 <code>unknown</code>，
+  而不是硬套一个别人的约束。判定分四档：<code>blocked</code> / <code>ok</code> /
+  <code>no-constraint</code> / <code>unknown</code>，unknown 是独立的一种答案。</p>
+
+<h2>站方那份下载量，已经过期多久了</h2>
   <p>这个站给 6,896 个插件里的 <strong>624 个</strong>（9%）标了下载量，
   其余 91% 没有数字。而且那 624 条的采集时间停在
   <strong>2026-08-19</strong> —— 一个多月前。</p>
