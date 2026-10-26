@@ -143,6 +143,44 @@ font-family:Consolas,monospace;font-size:13px;color:#7ce0b0;overflow-x:auto;marg
 
 
 
+
+
+
+
+
+  <h2>站方那份下载量，已经过期多久了</h2>
+  <p>这个站给 6,896 个插件里的 <strong>624 个</strong>（9%）标了下载量，
+  其余 91% 没有数字。而且那 624 条的采集时间停在
+  <strong>2026-08-19</strong> —— 一个多月前。</p>
+  <p>我随机抽样了 17 条能对上 npm 包的记录（固定种子，可复现），把站方记的值和现在 npm 官方接口的值比了一遍：</p>
+  <div class="statrow">
+    <div class="stat"><div class="v">2.5×</div><div class="k">中位倍数（现值 ÷ 站方值）</div></div>
+    <div class="stat"><div class="v" style="color:#64dca0">14</div><div class="k">涨了</div></div>
+    <div class="stat"><div class="v" style="color:#f06e6e">3</div><div class="k">跌了</div></div>
+    <div class="stat"><div class="v">0</div><div class="k">持平</div></div>
+  </div>
+  <table style="margin-top:14px">
+    <thead><tr><th>包名</th><th style="text-align:right">站方记的（8/19）</th>
+    <th style="text-align:right">npm 现在</th><th style="text-align:right">变化</th></tr></thead>
+    <tbody>
+<tr><td class="n2"><code>dsh-cost-meter</code></td><td class="d2">919</td><td class="d2">105,248</td><td class="m2" style="color:#64dca0">↑ 114.5×</td></tr>
+<tr><td class="n2"><code>plugin</code></td><td class="d2">142</td><td class="d2">28,314</td><td class="m2" style="color:#64dca0">↑ 199.4×</td></tr>
+<tr><td class="n2"><code>dsh-remote</code></td><td class="d2">1,687</td><td class="d2">19,914</td><td class="m2" style="color:#64dca0">↑ 11.8×</td></tr>
+<tr><td class="n2"><code>dsh-vision-router</code></td><td class="d2">21,679</td><td class="d2">33,058</td><td class="m2" style="color:#64dca0">↑ 1.5×</td></tr>
+<tr><td class="n2"><code>dsh-office-tools</code></td><td class="d2">584</td><td class="d2">9,252</td><td class="m2" style="color:#64dca0">↑ 15.8×</td></tr>
+<tr><td class="n2"><code>terminal</code></td><td class="d2">379</td><td class="d2">4,991</td><td class="m2" style="color:#64dca0">↑ 13.2×</td></tr>
+<tr><td class="n2"><code>dsh-free-vision</code></td><td class="d2">4,739</td><td class="d2">2,313</td><td class="m2" style="color:#f06e6e">↓ 0.5×</td></tr>
+<tr><td class="n2"><code>dsh-balance-plugin</code></td><td class="d2">446</td><td class="d2">2,243</td><td class="m2" style="color:#64dca0">↑ 5.0×</td></tr>
+<tr><td class="n2"><code>dsh-inspiration-deck-workshop</code></td><td class="d2">11</td><td class="d2">811</td><td class="m2" style="color:#64dca0">↑ 73.7×</td></tr>
+<tr><td class="n2"><code>dsh-monitor</code></td><td class="d2">200</td><td class="d2">855</td><td class="m2" style="color:#64dca0">↑ 4.3×</td></tr>
+    </tbody>
+  </table>
+  <p class="small" style="color:var(--dim);font-size:13px;line-height:1.6">
+  这不是谁的数据错了 —— 站方是每天批量采集，这是设计上的取舍，只是快照会旧。
+  <strong>差别在于「按需查」和「定期采」的区别</strong>：本页上的尺子每次都直接问
+  npm 官方接口要当前值，问到的是现在的数；下载量快照适合做趋势比对，
+  但不适合回答「现在有多少人在用」。</p>
+
   <h2>装得最多的那些，能力面是什么</h2>
   <p>下载量和能力面是两个正交的维度。上面那张表把它们放在同一行里，
   这一节单独把<strong>既被大量安装、又同时具备危险能力组合</strong>的挑出来 ——
