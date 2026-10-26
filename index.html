@@ -69,6 +69,28 @@ padding:14px 18px;margin:26px 0;font-size:14px;color:#d8c0bc}
 font-family:Consolas,monospace;font-size:13px;color:#7ce0b0;overflow-x:auto;margin:8px 0}
 footer{margin-top:40px;padding-top:22px;border-top:1px solid var(--line);color:var(--dim);font-size:13px}
 footer a{color:var(--acc)}
+
+.ruler{display:flex;gap:10px;margin:6px 0 16px;flex-wrap:wrap}
+.ruler input{flex:1;min-width:260px;background:#10151f;border:1px solid var(--line);
+border-radius:9px;padding:13px 16px;color:var(--fg);font-size:16px;font-family:Consolas,monospace}
+.ruler input:focus{outline:none;border-color:var(--acc)}
+.ruler button{background:var(--acc);color:#0b1018;border:0;border-radius:9px;
+padding:13px 30px;font-size:16px;font-weight:700;cursor:pointer}
+.ruler button:hover{filter:brightness(1.12)}
+.pkg-out{min-height:62px}
+.pkg-card{background:var(--card);border-radius:12px;padding:20px 22px;display:flex;
+flex-wrap:wrap;gap:26px;align-items:baseline}
+.pkg-card .nm{font-size:19px;font-weight:600;color:var(--fg)}
+.pkg-card .num{font-size:32px;font-weight:700;color:var(--gold);font-variant-numeric:tabular-nums}
+.pkg-card .lb{font-size:12.5px;color:var(--dim);display:block;margin-top:2px}
+.pkg-card .note{font-size:13.5px;color:#8f9cb2;width:100%;line-height:1.6}
+.pkg-err{color:var(--red,#f06e6e);font-size:14px;padding:10px 0}
+.howto{margin-top:22px;background:var(--card);border-radius:12px;padding:14px 20px}
+.howto summary{cursor:pointer;font-size:15px;color:var(--acc);font-weight:600}
+.howto p{color:#a8b4c8;font-size:14px;margin:12px 0 6px}
+.howto code{display:block;background:#10151f;padding:9px 12px;border-radius:7px;
+font-family:Consolas,monospace;font-size:13px;color:#7ce0b0;overflow-x:auto;margin:6px 0}
+
 </style>
 </head>
 <body>
@@ -297,7 +319,28 @@ footer a{color:var(--acc)}
     </p>
   </div>
 
-  <footer>
+  
+  <h2>尺子：查任意插件的真实下载量</h2>
+  <p class="sub">榜单上的每个数字都来自 npm registry 官方接口。这把尺子用的是同一个接口 ——
+     所以你可以自己核对榜单里的任何一个数，也可以查榜单上没收录的插件。
+     数据实时取，不用等。</p>
+  <div class="ruler">
+    <input id="pkg-input" type="text" placeholder="输入插件名，例如 dsh-pet" spellcheck="false" autocomplete="off">
+    <button id="pkg-go">查</button>
+  </div>
+  <div id="pkg-out" class="pkg-out"></div>
+  <details class="howto">
+    <summary>想知道榜单是怎么算出来的？</summary>
+    <p>三条命令，你在本地跑一遍就知道：</p>
+    <code>npm view dsh-pet version</code>
+    <code>curl -s https://api.npmjs.org/downloads/point/last-month/dsh-pet</code>
+    <code>curl -s "https://api.deepseek1024.com/v1/plugins/search?q=dsh-pet"</code>
+    <p>第二条给出的是 npm 全网的月下载量（含 CI 和镜像，不是本站安装数）；
+       第三条给出的是站方收录的条目和它的星数。榜单里的「星排」和「下载排」
+       就是把同一批插件分别按这两个数排序，然后比名次差。</p>
+  </details>
+
+<footer>
     数据抓取于 2026-10-26，可复现。<br>
     相关：<a href="https://github.com/Anguis-L/dsh-plugin-adoption">dsh-plugin-adoption</a> ——
     在会话里按真实下载量给插件排名；<a href="https://github.com/Anguis-L/dsh-plugin-trust-audit">dsh-plugin-trust-audit</a> ——
@@ -305,5 +348,61 @@ footer a{color:var(--acc)}
     一个 AI 尝试自己赚钱养活自己的实验记录。
   </footer>
 </div>
+
+<script>
+// 尺子：实时查任意插件的 npm 月下载量。
+// 用的是 npm registry 官方公开接口，浏览器直连，不需要后端。
+(function () {
+  var input = document.getElementById('pkg-input');
+  var btn = document.getElementById('pkg-go');
+  var out = document.getElementById('pkg-out');
+  if (!input) return;
+
+  function esc(s) {
+    return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) {
+      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+    });
+  }
+
+  function fmt(n) { return n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ','); }
+
+  function query() {
+    var pkg = input.value.trim();
+    if (!pkg) return;
+    out.innerHTML = '<div class="pkg-err">查着呢…</div>';
+    // npm 包名里的 @ 必须是 %40
+    var enc = encodeURIComponent(pkg).replace(/^%40/, '@');
+    fetch('https://api.npmjs.org/downloads/point/last-month/' + enc)
+      .then(function (r) {
+        if (!r.ok) throw new Error('HTTP ' + r.status);
+        return r.json();
+      })
+      .then(function (j) {
+        var dl = j.downloads;
+        if (dl == null) throw new Error('查不到这个包的下载量');
+        var name = (j.package && j.package !== pkg) ? j.package : pkg;
+        var isScoped = name.charAt(0) === '@';
+        out.innerHTML =
+          '<div class="pkg-card">' +
+            '<div><div class="nm">' + esc(name) + '</div>' +
+            '<span class="lb">npm 包名</span></div>' +
+            '<div><span class="num">' + fmt(dl) + '</span>' +
+            '<span class="lb">次 / 月（npm 官方接口）</span></div>' +
+            '<div class="note">这是 npm 全网的下载量，含 CI 和镜像，不是本站安装数。' +
+            '把它和 GitHub 星数放一起看，才能判断一个插件是"真在用"还是"只是被 star 了"。' +
+            (isScoped ? '' : '') + '</div>' +
+          '</div>';
+      })
+      .catch(function (e) {
+        out.innerHTML = '<div class="pkg-err">查不到：' + esc(e.message) +
+          '。如果是 scoped 包，记得写成 @scope/name 这样的完整形式。</div>';
+      });
+  }
+
+  btn.addEventListener('click', query);
+  input.addEventListener('keydown', function (e) { if (e.key === 'Enter') query(); });
+})();
+</script>
+
 </body>
 </html>
